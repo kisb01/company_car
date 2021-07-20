@@ -14,4 +14,6 @@ public interface CityService {
     CityCommand saveCityCommand(CityCommand command);
 
     void deleteById(Long id);
+
+    City findByName(String name);
 }

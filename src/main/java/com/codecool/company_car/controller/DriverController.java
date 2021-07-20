@@ -1,7 +1,6 @@
 package com.codecool.company_car.controller;
 
 import com.codecool.company_car.command.DriverCommand;
-import com.codecool.company_car.model.City;
 import com.codecool.company_car.model.Driver;
 import com.codecool.company_car.service.CityService;
 import com.codecool.company_car.service.DriverService;
@@ -9,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Slf4j
 @RestController
@@ -36,9 +34,10 @@ public class DriverController {
 
     @PostMapping
     public void add(@RequestBody DriverCommand command) {
-        if (!cityService.findAll().stream().map(City::getName).collect(Collectors.toSet()).contains(command.getCityCommand().getName())) {
+        if (command.getCityCommand().getId() == 0) {
             cityService.saveCityCommand(command.getCityCommand());
         }
+        command.getCityCommand().setId(cityService.findByName(command.getCityCommand().getName()).getId());
         driverService.saveDriverCommand(command);
     }
 

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -41,6 +42,10 @@ public class CityServiceImpl implements CityService {
             throw new RuntimeException("No City found");
         }
         return optionalCity.get();
+    }
+
+    public City findByName(String name) {
+        return findAll().stream().filter(c -> c.getName().equals(name)).findFirst().get();
     }
 
     @Override
