@@ -13,10 +13,10 @@ public class CompanyCarCommand {
 
     private Long id;
     private String licencePlateNumber;
-    private ManufacturerCommand manufacturerCommand;
+    private Long manufacturerId;
     private String model;
-    private ColorCommand colorCommand;
-    private DriverCommand driverCommand;
+    private Long colorId;
+    private Long driverId;
     private LocalDate inUseSince;
     private Boolean repairRequired;
 }

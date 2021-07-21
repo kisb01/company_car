@@ -28,10 +28,10 @@ public class CompanyCarToCompanyCarCommand implements Converter<CompanyCar, Comp
        final CompanyCarCommand companyCarCommand = new CompanyCarCommand();
        companyCarCommand.setId(source.getId());
        companyCarCommand.setLicencePlateNumber(source.getLicencePlateNumber());
-       companyCarCommand.setManufacturerCommand(manufacturerToManufacturerCommand.convert(source.getManufacturer()));
+       companyCarCommand.setManufacturerId(source.getManufacturer().getId());
        companyCarCommand.setModel(source.getModel());
-       companyCarCommand.setColorCommand(colorToColorCommand.convert(source.getColor()));
-       companyCarCommand.setDriverCommand(driverToDriverCommand.convert(source.getDriver()));
+       companyCarCommand.setColorId(source.getColor().getId());
+       companyCarCommand.setDriverId(source.getDriver().getDriverId());
        companyCarCommand.setInUseSince(source.getInUseSince());
        companyCarCommand.setRepairRequired(source.getRepairRequired());
        return companyCarCommand;

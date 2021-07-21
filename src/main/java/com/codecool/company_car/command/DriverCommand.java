@@ -14,6 +14,7 @@ public class DriverCommand {
     private Long driverId;
     private String firstName;
     private String lastName;
-    private CityCommand cityCommand;
+    private Long companyCarId;
+    private Long cityId;
     private LocalDate birthDate;
 }

@@ -34,10 +34,6 @@ public class DriverController {
 
     @PostMapping
     public void add(@RequestBody DriverCommand command) {
-        if (command.getCityCommand().getId() == 0) {
-            cityService.saveCityCommand(command.getCityCommand());
-        }
-        command.getCityCommand().setId(cityService.findByName(command.getCityCommand().getName()).getId());
         driverService.saveDriverCommand(command);
     }
 

@@ -18,6 +18,8 @@ public class Driver {
     private Long driverId;
     private String firstName;
     private String lastName;
+    @OneToOne(cascade = CascadeType.ALL)
+    private CompanyCar companyCar;
     @ManyToOne
     private City city;
     private LocalDate birthDate;

@@ -25,7 +25,8 @@ public class DriverToDriverCommand implements Converter<Driver, DriverCommand> {
         driverCommand.setDriverId(source.getDriverId());
         driverCommand.setFirstName(source.getFirstName());
         driverCommand.setLastName(source.getLastName());
-        driverCommand.setCityCommand(cityToCityCommand.convert(source.getCity()));
+        driverCommand.setCompanyCarId(source.getCompanyCar().getId());
+        driverCommand.setCityId(source.getCity().getId());
         driverCommand.setBirthDate(source.getBirthDate());
         return driverCommand;
     }
