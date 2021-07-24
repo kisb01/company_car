@@ -10,16 +10,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class CompanyCarToCompanyCarCommand implements Converter<CompanyCar, CompanyCarCommand> {
 
-    private final ManufacturerToManufacturerCommand manufacturerToManufacturerCommand;
-    private final ColorToColorCommand colorToColorCommand;
-    private final DriverToDriverCommand driverToDriverCommand;
-
-    public CompanyCarToCompanyCarCommand(ManufacturerToManufacturerCommand manufacturerToManufacturerCommand, ColorToColorCommand colorToColorCommand, DriverToDriverCommand driverToDriverCommand) {
-        this.manufacturerToManufacturerCommand = manufacturerToManufacturerCommand;
-        this.colorToColorCommand = colorToColorCommand;
-        this.driverToDriverCommand = driverToDriverCommand;
-    }
-
     @Synchronized
     @Nullable
     @Override
@@ -28,10 +18,20 @@ public class CompanyCarToCompanyCarCommand implements Converter<CompanyCar, Comp
        final CompanyCarCommand companyCarCommand = new CompanyCarCommand();
        companyCarCommand.setId(source.getId());
        companyCarCommand.setLicencePlateNumber(source.getLicencePlateNumber());
-       companyCarCommand.setManufacturerId(source.getManufacturer().getId());
+
+       if (source.getManufacturer() != null) {
+           companyCarCommand.setManufacturerId(source.getManufacturer().getId());
+       }
        companyCarCommand.setModel(source.getModel());
-       companyCarCommand.setColorId(source.getColor().getId());
-       companyCarCommand.setDriverId(source.getDriver().getDriverId());
+
+       if (source.getColor() != null) {
+           companyCarCommand.setColorId(source.getColor().getId());
+       }
+
+//       if (source.getDriver() != null) {
+//           companyCarCommand.setDriverId(source.getDriver().getDriverId());
+//       }
+
        companyCarCommand.setInUseSince(source.getInUseSince());
        companyCarCommand.setRepairRequired(source.getRepairRequired());
        return companyCarCommand;

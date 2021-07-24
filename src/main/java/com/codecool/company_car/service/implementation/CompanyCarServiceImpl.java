@@ -58,23 +58,17 @@ public class CompanyCarServiceImpl implements CompanyCarService {
 
     @Override
     public CompanyCar findByDriver(String name) {
-        return findAll().stream().filter(car ->
-                getDriverName(car).equals(name))
-                .findFirst().orElseGet(null);
-    }
-
-    private String getDriverName(CompanyCar car) {
-        return "" + car.getDriver().getFirstName() + " " + car.getDriver().getLastName();
+        return companyCarRepository.findByDriverName(name);
     }
 
     @Override
     public Set<CompanyCar> findAllByManufacturer(String name) {
-        return findAll().stream().filter(car -> car.getManufacturer().getName().equals(name)).collect(Collectors.toSet());
+        return findAll().stream().filter(car -> car.getManufacturer().getName().equalsIgnoreCase(name)).collect(Collectors.toSet());
     }
 
     @Override
     public Set<CompanyCar> findAllByColor(String name) {
-        return findAll().stream().filter(car -> car.getColor().getName().equals(name)).collect(Collectors.toSet());
+        return findAll().stream().filter(car -> car.getColor().getName().equalsIgnoreCase(name)).collect(Collectors.toSet());
     }
 
     @Override
@@ -84,6 +78,6 @@ public class CompanyCarServiceImpl implements CompanyCarService {
 
     @Override
     public Set<CompanyCar> findAllInCity(String name) {
-        return findAll().stream().filter(car -> car.getDriver().getCity().getName().equals(name)).collect(Collectors.toSet());
+        return companyCarRepository.findAllInCity(name);
     }
 }

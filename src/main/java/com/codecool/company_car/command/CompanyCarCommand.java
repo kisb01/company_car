@@ -16,7 +16,7 @@ public class CompanyCarCommand {
     private Long manufacturerId;
     private String model;
     private Long colorId;
-    private Long driverId;
+//    private Long driverId;
     private LocalDate inUseSince;
-    private Boolean repairRequired;
+    private Boolean repairRequired = false;
 }
