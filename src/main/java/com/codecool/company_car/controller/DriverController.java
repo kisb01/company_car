@@ -48,8 +48,8 @@ public class DriverController {
         driverService.deleteById(id);
     }
 
-    @GetMapping("/{name}")
-    public Set<Driver> allFromACity(@PathVariable("name") String name) {
+    @GetMapping("/name")
+    public Set<Driver> allFromACity(@RequestParam String name) {
         return driverService.allDriversFromACity(name);
     }
 }

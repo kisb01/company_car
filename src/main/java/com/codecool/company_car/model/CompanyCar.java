@@ -1,5 +1,6 @@
 package com.codecool.company_car.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
+@JsonIgnoreProperties("driver")
 public class CompanyCar {
 
     @Id
