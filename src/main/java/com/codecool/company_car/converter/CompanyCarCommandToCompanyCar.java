@@ -22,7 +22,7 @@ public class CompanyCarCommandToCompanyCar implements Converter<CompanyCarComman
         companyCar.setId(source.getId());
         companyCar.setLicencePlateNumber(source.getLicencePlateNumber());
 
-        if (source.getManufacturerId() == null) {
+        if (source.getManufacturerId() != null) {
             Manufacturer manufacturer = new Manufacturer();
             manufacturer.setId(source.getManufacturerId());
             companyCar.setManufacturer(manufacturer);
@@ -30,14 +30,14 @@ public class CompanyCarCommandToCompanyCar implements Converter<CompanyCarComman
         }
         companyCar.setModel(source.getModel());
 
-        if (source.getColorId() == null) {
+        if (source.getColorId() != null) {
             Color color = new Color();
             color.setId(source.getColorId());
             companyCar.setColor(color);
             color.getCompanyCars().add(companyCar);
         }
 
-        if (source.getDriverId() == null) {
+        if (source.getDriverId() != null) {
             Driver driver = new Driver();
             driver.setDriverId(source.getDriverId());
             companyCar.setDriver(driver);

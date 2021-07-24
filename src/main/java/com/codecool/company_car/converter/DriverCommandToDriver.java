@@ -20,7 +20,7 @@ public class DriverCommandToDriver implements Converter<DriverCommand, Driver> {
         driver.setDriverId(source.getDriverId());
         driver.setFirstName(source.getFirstName());
         driver.setLastName(source.getLastName());
-        if (source.getCompanyCarId() == null) {
+        if (source.getCompanyCarId() != null) {
             CompanyCar companyCar = new CompanyCar();
             companyCar.setId(source.getCompanyCarId());
             driver.setCompanyCar(companyCar);
