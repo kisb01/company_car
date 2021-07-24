@@ -20,7 +20,7 @@ public class CompanyCar {
     private String model;
     @ManyToOne
     private Color color;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "companyCar")
     private Driver driver;
     private LocalDate inUseSince;
     private Boolean repairRequired;
