@@ -2,7 +2,6 @@ package com.codecool.company_car.converter;
 
 import com.codecool.company_car.command.DriverCommand;
 import com.codecool.company_car.model.City;
-import com.codecool.company_car.model.CompanyCar;
 import com.codecool.company_car.model.Driver;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
@@ -21,13 +20,6 @@ public class DriverCommandToDriver implements Converter<DriverCommand, Driver> {
         driver.setDriverId(source.getDriverId());
         driver.setFirstName(source.getFirstName());
         driver.setLastName(source.getLastName());
-
-        if (source.getCompanyCarId() != null) {
-            CompanyCar companyCar = new CompanyCar();
-            companyCar.setId(source.getCompanyCarId());
-            companyCar.setDriver(driver);
-            driver.setCompanyCar(companyCar);
-        }
 
         if (source.getCityId() != null) {
             City city = new City();

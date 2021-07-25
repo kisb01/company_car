@@ -2,7 +2,6 @@ package com.codecool.company_car.service;
 
 import com.codecool.company_car.command.CompanyCarCommand;
 import com.codecool.company_car.model.CompanyCar;
-import com.codecool.company_car.model.Driver;
 
 import java.util.Set;
 

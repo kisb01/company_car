@@ -28,9 +28,9 @@ public class CompanyCarToCompanyCarCommand implements Converter<CompanyCar, Comp
            companyCarCommand.setColorId(source.getColor().getId());
        }
 
-//       if (source.getDriver() != null) {
-//           companyCarCommand.setDriverId(source.getDriver().getDriverId());
-//       }
+       if (source.getDriver() != null) {
+           companyCarCommand.setDriverId(source.getDriver().getDriverId());
+       }
 
        companyCarCommand.setInUseSince(source.getInUseSince());
        companyCarCommand.setRepairRequired(source.getRepairRequired());

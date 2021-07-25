@@ -3,6 +3,7 @@ package com.codecool.company_car.converter;
 import com.codecool.company_car.command.CompanyCarCommand;
 import com.codecool.company_car.model.Color;
 import com.codecool.company_car.model.CompanyCar;
+import com.codecool.company_car.model.Driver;
 import com.codecool.company_car.model.Manufacturer;
 import lombok.Synchronized;
 import org.springframework.core.convert.converter.Converter;
@@ -36,11 +37,12 @@ public class CompanyCarCommandToCompanyCar implements Converter<CompanyCarComman
             companyCar.setColor(color);
         }
 
-//        if (source.getDriverId() != null) {
-//            Driver driver = new Driver();
-//            driver.setDriverId(source.getDriverId());
-//            companyCar.setDriver(driver);
-//        }
+        if (source.getDriverId() != null) {
+            Driver driver = new Driver();
+            driver.setDriverId(source.getDriverId());
+            driver.setCompanyCar(companyCar);
+            companyCar.setDriver(driver);
+        }
 
         companyCar.setInUseSince(source.getInUseSince());
         companyCar.setRepairRequired(source.getRepairRequired());
