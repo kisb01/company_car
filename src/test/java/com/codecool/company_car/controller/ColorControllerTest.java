@@ -1,7 +1,7 @@
 package com.codecool.company_car.controller;
 
-import com.codecool.company_car.model.City;
-import com.codecool.company_car.service.CityService;
+import com.codecool.company_car.model.Color;
+import com.codecool.company_car.service.ColorService;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,50 +20,50 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(CityController.class)
-class CityControllerTest {
+@WebMvcTest(ColorController.class)
+public class ColorControllerTest {
 
     @MockBean
-    CityService cityService;
+    ColorService colorService;
 
     @Autowired
     MockMvc mockMvc;
 
     @Test
     public void findAll_ShouldReturnAll() throws Exception {
-        City city = new City();
-        city.setId(1l);
-        city.setName("Budapest");
+        Color color = new Color();
+        color.setId(1l);
+        color.setName("Red");
 
-        when(cityService.findAll()).thenReturn(Set.of(city));
+        when(colorService.findAll()).thenReturn(Set.of(color));
 
-        mockMvc.perform(get("/city")).andExpect(status().isOk())
+        mockMvc.perform(get("/color")).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].id", is(city.getId().intValue())))
-                .andExpect(jsonPath("$[0].name", is(city.getName())));
+                .andExpect(jsonPath("$[0].id", is(color.getId().intValue())))
+                .andExpect(jsonPath("$[0].name", is(color.getName())));
     }
 
     @Test
     public void findById_ShouldReturnFirst() throws Exception {
-        City city = new City();
-        city.setId(1L);
-        city.setName("Budapest");
+        Color color = new Color();
+        color.setId(1L);
+        color.setName("Red");
 
-        when(cityService.findById(1L)).thenReturn(city);
+        when(colorService.findById(1L)).thenReturn(color);
 
-        mockMvc.perform(get("/city/1")).andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(city.getId().intValue())))
-                .andExpect(jsonPath("$.name", is(city.getName())));
+        mockMvc.perform(get("/color/1")).andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(color.getId().intValue())))
+                .andExpect(jsonPath("$.name", is(color.getName())));
+
     }
 
     @Test
     public void add_ShouldReturnOK() throws Exception {
         JSONObject json = new JSONObject();
         json.put("id", 1);
-        json.put("name", "Budapest");
+        json.put("name", "Red");
 
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/city")
+        mockMvc.perform(MockMvcRequestBuilders.post("/color")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(String.valueOf(json))
                 .accept(MediaType.APPLICATION_JSON))
@@ -74,9 +74,9 @@ class CityControllerTest {
     public void delete_ShouldReturnOk() throws Exception {
         JSONObject json = new JSONObject();
         json.put("id", 1);
-        json.put("name", "Budapest");
+        json.put("name", "Red");
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/city/1"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/color/1"))
                 .andExpect(status().isOk());
     }
 

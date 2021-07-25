@@ -13,7 +13,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@JsonIgnoreProperties("driver")
 public class CompanyCar {
 
     @Id
@@ -29,7 +28,7 @@ public class CompanyCar {
     @ManyToOne
     private Color color;
 
-    @OneToOne(mappedBy = "companyCar")
+    @OneToOne
     private Driver driver;
     private LocalDate inUseSince;
     private Boolean repairRequired = false;

@@ -1,7 +1,8 @@
 package com.codecool.company_car.controller;
 
 import com.codecool.company_car.model.City;
-import com.codecool.company_car.service.CityService;
+import com.codecool.company_car.model.Manufacturer;
+import com.codecool.company_car.service.ManufacturerService;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,50 +21,50 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(CityController.class)
-class CityControllerTest {
+@WebMvcTest(ManufacturerController.class)
+public class ManufacturerControllerTest {
 
     @MockBean
-    CityService cityService;
+    ManufacturerService manufacturerService;
 
     @Autowired
     MockMvc mockMvc;
 
     @Test
     public void findAll_ShouldReturnAll() throws Exception {
-        City city = new City();
-        city.setId(1l);
-        city.setName("Budapest");
+        Manufacturer manufacturer = new Manufacturer();
+        manufacturer.setId(1l);
+        manufacturer.setName("Opel");
 
-        when(cityService.findAll()).thenReturn(Set.of(city));
+        when(manufacturerService.findAll()).thenReturn(Set.of(manufacturer));
 
-        mockMvc.perform(get("/city")).andExpect(status().isOk())
+        mockMvc.perform(get("/manufacturer")).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].id", is(city.getId().intValue())))
-                .andExpect(jsonPath("$[0].name", is(city.getName())));
+                .andExpect(jsonPath("$[0].id", is(manufacturer.getId().intValue())))
+                .andExpect(jsonPath("$[0].name", is(manufacturer.getName())));
     }
 
     @Test
     public void findById_ShouldReturnFirst() throws Exception {
-        City city = new City();
-        city.setId(1L);
-        city.setName("Budapest");
+        Manufacturer manufacturer = new Manufacturer();
+        manufacturer.setId(1l);
+        manufacturer.setName("Opel");
 
-        when(cityService.findById(1L)).thenReturn(city);
+        when(manufacturerService.findById(1L)).thenReturn(manufacturer);
 
-        mockMvc.perform(get("/city/1")).andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(city.getId().intValue())))
-                .andExpect(jsonPath("$.name", is(city.getName())));
+        mockMvc.perform(get("/manufacturer/1")).andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(manufacturer.getId().intValue())))
+                .andExpect(jsonPath("$.name", is(manufacturer.getName())));
     }
 
     @Test
     public void add_ShouldReturnOK() throws Exception {
         JSONObject json = new JSONObject();
         json.put("id", 1);
-        json.put("name", "Budapest");
+        json.put("name", "Opel");
 
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/city")
+        mockMvc.perform(MockMvcRequestBuilders.post("/manufacturer")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(String.valueOf(json))
                 .accept(MediaType.APPLICATION_JSON))
@@ -74,10 +75,9 @@ class CityControllerTest {
     public void delete_ShouldReturnOk() throws Exception {
         JSONObject json = new JSONObject();
         json.put("id", 1);
-        json.put("name", "Budapest");
+        json.put("name", "Opel");
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/city/1"))
+        mockMvc.perform(MockMvcRequestBuilders.delete("/manufacturer/1"))
                 .andExpect(status().isOk());
     }
-
 }
