@@ -7,8 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -23,7 +23,7 @@ public class Color {
     @NotBlank
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "color")
-    private Set<CompanyCar> companyCars = new HashSet<>();
+    private List<CompanyCar> companyCars = new ArrayList<>();
 
     public Color(Long id, String name) {
         this.id = id;

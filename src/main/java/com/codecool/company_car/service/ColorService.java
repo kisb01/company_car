@@ -3,11 +3,11 @@ package com.codecool.company_car.service;
 import com.codecool.company_car.command.ColorCommand;
 import com.codecool.company_car.model.Color;
 
-import java.util.Set;
+import java.util.List;
 
 public interface ColorService {
 
-    Set<Color> findAll();
+    List<Color> findAll();
 
     Color findById(Long id);
 

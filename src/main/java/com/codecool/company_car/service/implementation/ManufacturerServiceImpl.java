@@ -9,9 +9,7 @@ import com.codecool.company_car.service.ManufacturerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -28,8 +26,8 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     }
 
     @Override
-    public Set<Manufacturer> findAll() {
-        Set<Manufacturer> manufacturers = new HashSet<>();
+    public List<Manufacturer> findAll() {
+        List<Manufacturer> manufacturers = new ArrayList<>();
         manufacturerRepository.findAll().iterator().forEachRemaining(manufacturers::add);
         return manufacturers;
     }

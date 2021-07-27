@@ -9,9 +9,7 @@ import com.codecool.company_car.service.ColorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -28,8 +26,8 @@ public class ColorServiceImpl implements ColorService {
     }
 
     @Override
-    public Set<Color> findAll() {
-        Set<Color> colors = new HashSet<>();
+    public List<Color> findAll() {
+        List<Color> colors = new ArrayList<>();
         colorRepository.findAll().iterator().forEachRemaining(colors::add);
         return colors;
     }

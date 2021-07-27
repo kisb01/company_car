@@ -1,6 +1,9 @@
 package com.codecool.company_car.controller;
 
-import com.codecool.company_car.model.*;
+import com.codecool.company_car.model.Color;
+import com.codecool.company_car.model.CompanyCar;
+import com.codecool.company_car.model.Driver;
+import com.codecool.company_car.model.Manufacturer;
 import com.codecool.company_car.service.CompanyCarService;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -12,9 +15,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -49,7 +53,7 @@ public class CompanyCarControllerTest {
         companyCar.setInUseSince(LocalDate.of(2003,12,12));
         companyCar.setRepairRequired(false);
 
-        when(companyCarService.findAll()).thenReturn(Set.of(companyCar));
+        when(companyCarService.findAll()).thenReturn(List.of(companyCar));
 
         mockMvc.perform(get("/companycar")).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))

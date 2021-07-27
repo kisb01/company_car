@@ -6,7 +6,7 @@ import com.codecool.company_car.service.ColorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -20,7 +20,7 @@ public class ColorController {
     }
 
     @GetMapping
-    public Set<Color> findAll() {
+    public List<Color> findAll() {
         return colorService.findAll();
     }
 

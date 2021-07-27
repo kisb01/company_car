@@ -9,9 +9,7 @@ import com.codecool.company_car.service.CompanyCarService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -29,8 +27,8 @@ public class CompanyCarServiceImpl implements CompanyCarService {
     }
 
     @Override
-    public Set<CompanyCar> findAll() {
-        Set<CompanyCar> companyCars = new HashSet<>();
+    public List<CompanyCar> findAll() {
+        List<CompanyCar> companyCars = new ArrayList<>();
         companyCarRepository.findAll().iterator().forEachRemaining(companyCars::add);
         return companyCars;
     }
@@ -62,22 +60,22 @@ public class CompanyCarServiceImpl implements CompanyCarService {
     }
 
     @Override
-    public Set<CompanyCar> findAllByManufacturer(String name) {
-        return findAll().stream().filter(car -> car.getManufacturer().getName().equalsIgnoreCase(name)).collect(Collectors.toSet());
+    public List<CompanyCar> findAllByManufacturer(String name) {
+        return findAll().stream().filter(car -> car.getManufacturer().getName().equalsIgnoreCase(name)).collect(Collectors.toList());
     }
 
     @Override
-    public Set<CompanyCar> findAllByColor(String name) {
-        return findAll().stream().filter(car -> car.getColor().getName().equalsIgnoreCase(name)).collect(Collectors.toSet());
+    public List<CompanyCar> findAllByColor(String name) {
+        return findAll().stream().filter(car -> car.getColor().getName().equalsIgnoreCase(name)).collect(Collectors.toList());
     }
 
     @Override
-    public Set<CompanyCar> findAllNeedsRepair() {
-        return findAll().stream().filter(CompanyCar::getRepairRequired).collect(Collectors.toSet());
+    public List<CompanyCar> findAllNeedsRepair() {
+        return findAll().stream().filter(CompanyCar::getRepairRequired).collect(Collectors.toList());
     }
 
     @Override
-    public Set<CompanyCar> findAllInCity(String name) {
+    public List<CompanyCar> findAllInCity(String name) {
         return companyCarRepository.findAllInCity(name);
     }
 }

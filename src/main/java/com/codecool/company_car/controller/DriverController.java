@@ -7,7 +7,7 @@ import com.codecool.company_car.service.DriverService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -23,7 +23,7 @@ public class DriverController {
     }
 
     @GetMapping
-    public Set<Driver> findAll() {
+    public List<Driver> findAll() {
         return driverService.findAll();
     }
 
@@ -49,7 +49,7 @@ public class DriverController {
     }
 
     @GetMapping("/name")
-    public Set<Driver> allFromACity(@RequestParam String city) {
+    public List<Driver> allFromACity(@RequestParam String city) {
         return driverService.allDriversFromACity(city);
     }
 }

@@ -3,11 +3,11 @@ package com.codecool.company_car.service;
 import com.codecool.company_car.command.CityCommand;
 import com.codecool.company_car.model.City;
 
-import java.util.Set;
+import java.util.List;
 
 public interface CityService {
 
-    Set<City> findAll();
+    List<City> findAll();
 
     City findById(Long id);
 

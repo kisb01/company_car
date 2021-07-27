@@ -4,10 +4,9 @@ import com.codecool.company_car.command.ManufacturerCommand;
 import com.codecool.company_car.model.Manufacturer;
 import com.codecool.company_car.service.ManufacturerService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -21,7 +20,7 @@ public class ManufacturerController {
     }
 
     @GetMapping
-    public Set<Manufacturer> findAll() {
+    public List<Manufacturer> findAll() {
         return manufacturerService.findAll();
     }
 

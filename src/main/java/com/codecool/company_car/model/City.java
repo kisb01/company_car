@@ -7,8 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -23,7 +23,7 @@ public class City {
     @NotBlank
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
-    private Set<Driver> drivers = new HashSet<>();
+    private List<Driver> drivers = new ArrayList<>();
 
     public City(Long id, String name) {
         this.id = id;

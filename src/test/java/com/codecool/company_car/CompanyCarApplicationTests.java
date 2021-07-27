@@ -51,7 +51,7 @@ class CompanyCarApplicationTests {
     @Test
     public void testFindByDriver() {
         CompanyCar expected = new CompanyCar(1L, "IIL-215", new Manufacturer(1L, "Opel"), "Corsa", new Color(4L, "Grey"),
-                        new Driver(), LocalDate.of(2002, 12, 05), false);
+                        new Driver(), LocalDate.of(2002, 12, 5), false);
 
         ResponseEntity<CompanyCar> responseEntity = restTemplate.getForEntity(BASE_URL + "/companycar/driver?name=Eszter", CompanyCar.class);
         CompanyCar actual = responseEntity.getBody();

@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.Set;
+import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -32,10 +32,10 @@ public class ColorControllerTest {
     @Test
     public void findAll_ShouldReturnAll() throws Exception {
         Color color = new Color();
-        color.setId(1l);
+        color.setId(1L);
         color.setName("Red");
 
-        when(colorService.findAll()).thenReturn(Set.of(color));
+        when(colorService.findAll()).thenReturn(List.of(color));
 
         mockMvc.perform(get("/color")).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))

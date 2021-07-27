@@ -3,11 +3,11 @@ package com.codecool.company_car.service;
 import com.codecool.company_car.command.DriverCommand;
 import com.codecool.company_car.model.Driver;
 
-import java.util.Set;
+import java.util.List;
 
 public interface DriverService {
 
-    Set<Driver> findAll();
+    List<Driver> findAll();
 
     Driver findById(Long id);
 
@@ -15,5 +15,5 @@ public interface DriverService {
 
     void deleteById(Long id);
 
-    Set<Driver> allDriversFromACity(String name);
+    List<Driver> allDriversFromACity(String name);
 }

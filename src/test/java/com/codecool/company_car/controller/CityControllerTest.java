@@ -11,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.Set;
+import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -35,7 +35,7 @@ class CityControllerTest {
         city.setId(1l);
         city.setName("Budapest");
 
-        when(cityService.findAll()).thenReturn(Set.of(city));
+        when(cityService.findAll()).thenReturn(List.of(city));
 
         mockMvc.perform(get("/city")).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))

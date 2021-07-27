@@ -1,7 +1,6 @@
 package com.codecool.company_car.controller;
 
 import com.codecool.company_car.model.City;
-import com.codecool.company_car.model.CompanyCar;
 import com.codecool.company_car.model.Driver;
 import com.codecool.company_car.service.CityService;
 import com.codecool.company_car.service.DriverService;
@@ -15,7 +14,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDate;
-import java.util.Set;
+import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -47,7 +46,7 @@ public class DriverControllerTest {
         driver.setLastName("Bíró");
         driver.setBirthDate(LocalDate.of(1984, 6,14));
 
-        when(driverService.findAll()).thenReturn(Set.of(driver));
+        when(driverService.findAll()).thenReturn(List.of(driver));
 
         mockMvc.perform(get("/driver")).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))

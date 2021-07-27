@@ -9,7 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Set;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -23,7 +23,7 @@ public class CityController {
     }
 
     @GetMapping
-    public Set<City> findAll() {
+    public List<City> findAll() {
         return cityService.findAll();
     }
 

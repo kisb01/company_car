@@ -1,6 +1,5 @@
 package com.codecool.company_car.controller;
 
-import com.codecool.company_car.model.City;
 import com.codecool.company_car.model.Manufacturer;
 import com.codecool.company_car.service.ManufacturerService;
 import org.json.JSONObject;
@@ -12,7 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.Set;
+import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
@@ -33,10 +32,10 @@ public class ManufacturerControllerTest {
     @Test
     public void findAll_ShouldReturnAll() throws Exception {
         Manufacturer manufacturer = new Manufacturer();
-        manufacturer.setId(1l);
+        manufacturer.setId(1L);
         manufacturer.setName("Opel");
 
-        when(manufacturerService.findAll()).thenReturn(Set.of(manufacturer));
+        when(manufacturerService.findAll()).thenReturn(List.of(manufacturer));
 
         mockMvc.perform(get("/manufacturer")).andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))

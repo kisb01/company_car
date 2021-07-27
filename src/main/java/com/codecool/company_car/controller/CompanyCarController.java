@@ -6,7 +6,7 @@ import com.codecool.company_car.service.CompanyCarService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -20,7 +20,7 @@ public class CompanyCarController {
     }
 
     @GetMapping
-    public Set<CompanyCar> findAll() {
+    public List<CompanyCar> findAll() {
         return companyCarService.findAll();
     }
 
@@ -51,22 +51,22 @@ public class CompanyCarController {
     }
 
     @GetMapping("/manufacturer")
-    public Set<CompanyCar> findAllByManufacturer(@RequestParam String name) {
+    public List<CompanyCar> findAllByManufacturer(@RequestParam String name) {
         return companyCarService.findAllByManufacturer(name);
     }
 
     @GetMapping("/color")
-    public Set<CompanyCar> findAllByColor(@RequestParam String name) {
+    public List<CompanyCar> findAllByColor(@RequestParam String name) {
         return companyCarService.findAllByColor(name);
     }
 
     @GetMapping("/repair")
-    public Set<CompanyCar> findAllNeedsRepair() {
+    public List<CompanyCar> findAllNeedsRepair() {
         return companyCarService.findAllNeedsRepair();
     }
 
     @GetMapping("/city")
-    public Set<CompanyCar> findAllInCity(@RequestParam String name) {
+    public List<CompanyCar> findAllInCity(@RequestParam String name) {
         return companyCarService.findAllInCity(name);
     }
 

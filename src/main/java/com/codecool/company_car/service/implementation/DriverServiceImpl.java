@@ -9,9 +9,7 @@ import com.codecool.company_car.service.DriverService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -29,8 +27,8 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public Set<Driver> findAll() {
-        Set<Driver> drivers = new HashSet<>();
+    public List<Driver> findAll() {
+        List<Driver> drivers = new ArrayList<>();
         driverRepository.findAll().iterator().forEachRemaining(drivers::add);
         return drivers;
     }
@@ -57,7 +55,7 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public Set<Driver> allDriversFromACity(String name) {
-        return findAll().stream().filter(driver -> driver.getCity().getName().equals(name)).collect(Collectors.toSet());
+    public List<Driver> allDriversFromACity(String name) {
+        return findAll().stream().filter(driver -> driver.getCity().getName().equals(name)).collect(Collectors.toList());
     }
 }

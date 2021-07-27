@@ -3,11 +3,11 @@ package com.codecool.company_car.service;
 import com.codecool.company_car.command.CompanyCarCommand;
 import com.codecool.company_car.model.CompanyCar;
 
-import java.util.Set;
+import java.util.List;
 
 public interface CompanyCarService {
 
-    Set<CompanyCar> findAll();
+    List<CompanyCar> findAll();
 
     CompanyCar findById(Long id);
 
@@ -17,11 +17,11 @@ public interface CompanyCarService {
 
     CompanyCar findByDriver(String name);
 
-    Set<CompanyCar> findAllByManufacturer(String name);
+    List<CompanyCar> findAllByManufacturer(String name);
 
-    Set<CompanyCar> findAllByColor(String name);
+    List<CompanyCar> findAllByColor(String name);
 
-    Set<CompanyCar> findAllNeedsRepair();
+    List<CompanyCar> findAllNeedsRepair();
 
-    Set<CompanyCar> findAllInCity(String name);
+    List<CompanyCar> findAllInCity(String name);
 }
