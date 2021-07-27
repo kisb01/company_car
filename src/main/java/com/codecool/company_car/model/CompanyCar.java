@@ -32,4 +32,15 @@ public class CompanyCar {
     private Driver driver;
     private LocalDate inUseSince;
     private Boolean repairRequired = false;
+
+    public CompanyCar(Long id, String licencePlateNumber, Manufacturer manufacturer, String model, Color color, Driver driver, LocalDate inUseSince, Boolean repairRequired) {
+        this.id = id;
+        this.licencePlateNumber = licencePlateNumber;
+        this.manufacturer = manufacturer;
+        this.model = model;
+        this.color = color;
+        this.driver = driver;
+        this.inUseSince = inUseSince;
+        this.repairRequired = repairRequired;
+    }
 }

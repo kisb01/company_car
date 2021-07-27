@@ -49,7 +49,7 @@ public class DriverController {
     }
 
     @GetMapping("/name")
-    public Set<Driver> allFromACity(@RequestParam String name) {
-        return driverService.allDriversFromACity(name);
+    public Set<Driver> allFromACity(@RequestParam String city) {
+        return driverService.allDriversFromACity(city);
     }
 }

@@ -34,4 +34,11 @@ public class Driver {
     @Past
     private LocalDate birthDate;
 
+    public Driver(Long driverId, String firstName, String lastName, City city, LocalDate birthDate) {
+        this.driverId = driverId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.city = city;
+        this.birthDate = birthDate;
+    }
 }

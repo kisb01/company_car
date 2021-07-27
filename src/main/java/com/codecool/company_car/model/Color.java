@@ -24,4 +24,9 @@ public class Color {
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "color")
     private Set<CompanyCar> companyCars = new HashSet<>();
+
+    public Color(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

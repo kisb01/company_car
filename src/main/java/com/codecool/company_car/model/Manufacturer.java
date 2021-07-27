@@ -25,4 +25,9 @@ public class Manufacturer {
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manufacturer")
     private Set<CompanyCar> companyCars = new HashSet<>();
+
+    public Manufacturer(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

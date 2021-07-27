@@ -24,7 +24,7 @@ INSERT INTO driver (first_name, last_name, birth_date, city_id)
 VALUES ('Marcell', 'Krausz', '1993-11-11', 1);
 
 INSERT INTO company_car (licence_plate_number, color_id, manufacturer_id, model, driver_driver_id, in_use_since, repair_required)
-VALUES ('IIL-215', 4, 1, 'Corsa', 1, '1995-07-12', false);
+VALUES ('IIL-215', 4, 1, 'Corsa', 1, '2002-12-05', false);
 INSERT INTO company_car (licence_plate_number, color_id, manufacturer_id, model, driver_driver_id, in_use_since, repair_required)
 VALUES ('PRS-689', 5, 2, 'SuperB', null, '2018-12-11', false);
 INSERT INTO company_car (licence_plate_number, color_id, manufacturer_id, model, driver_driver_id, in_use_since, repair_required)

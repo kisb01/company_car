@@ -24,4 +24,9 @@ public class City {
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
     private Set<Driver> drivers = new HashSet<>();
+
+    public City(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
