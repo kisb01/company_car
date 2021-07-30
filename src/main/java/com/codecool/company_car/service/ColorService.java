@@ -1,6 +1,6 @@
 package com.codecool.company_car.service;
 
-import com.codecool.company_car.command.ColorCommand;
+import com.codecool.company_car.dto.ColorDto;
 import com.codecool.company_car.model.Color;
 
 import java.util.List;
@@ -11,7 +11,7 @@ public interface ColorService {
 
     Color findById(Long id);
 
-    ColorCommand saveColorCommand(ColorCommand command);
+    ColorDto saveColorCommand(ColorDto command);
 
     void deleteById(Long id);
 }

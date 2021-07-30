@@ -1,8 +1,8 @@
 package com.codecool.company_car.service.implementation;
 
-import com.codecool.company_car.command.CityCommand;
-import com.codecool.company_car.converter.CityCommandToCity;
-import com.codecool.company_car.converter.CityToCityCommand;
+import com.codecool.company_car.dto.CityDto;
+import com.codecool.company_car.converter.CityDtoToCity;
+import com.codecool.company_car.converter.CityToCityDto;
 import com.codecool.company_car.model.City;
 import com.codecool.company_car.repository.CityRepository;
 import com.codecool.company_car.service.CityService;
@@ -18,13 +18,13 @@ import java.util.Optional;
 public class CityServiceImpl implements CityService {
 
     private final CityRepository cityRepository;
-    private final CityCommandToCity cityCommandToCity;
-    private final CityToCityCommand cityToCityCommand;
+    private final CityDtoToCity cityDtoToCity;
+    private final CityToCityDto cityToCityDto;
 
-    public CityServiceImpl(CityRepository cityRepository, CityCommandToCity cityCommandToCity, CityToCityCommand cityToCityCommand) {
+    public CityServiceImpl(CityRepository cityRepository, CityDtoToCity cityDtoToCity, CityToCityDto cityToCityDto) {
         this.cityRepository = cityRepository;
-        this.cityCommandToCity = cityCommandToCity;
-        this.cityToCityCommand = cityToCityCommand;
+        this.cityDtoToCity = cityDtoToCity;
+        this.cityToCityDto = cityToCityDto;
     }
 
     @Override
@@ -48,10 +48,10 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public CityCommand saveCityCommand(CityCommand command) {
-        City city = cityCommandToCity.convert(command);
+    public CityDto saveCityCommand(CityDto command) {
+        City city = cityDtoToCity.convert(command);
         City savedCity = cityRepository.save(city);
-        return cityToCityCommand.convert(savedCity);
+        return cityToCityDto.convert(savedCity);
     }
 
     @Override

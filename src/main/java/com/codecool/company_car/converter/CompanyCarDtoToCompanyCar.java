@@ -1,6 +1,6 @@
 package com.codecool.company_car.converter;
 
-import com.codecool.company_car.command.CompanyCarCommand;
+import com.codecool.company_car.dto.CompanyCarDto;
 import com.codecool.company_car.model.Color;
 import com.codecool.company_car.model.CompanyCar;
 import com.codecool.company_car.model.Driver;
@@ -11,12 +11,12 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CompanyCarCommandToCompanyCar implements Converter<CompanyCarCommand, CompanyCar> {
+public class CompanyCarDtoToCompanyCar implements Converter<CompanyCarDto, CompanyCar> {
 
     @Synchronized
     @Nullable
     @Override
-    public CompanyCar convert(CompanyCarCommand source) {
+    public CompanyCar convert(CompanyCarDto source) {
         if (source == null) return null;
         final CompanyCar companyCar = new CompanyCar();
         companyCar.setId(source.getId());

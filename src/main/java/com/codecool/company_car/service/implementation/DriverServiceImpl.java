@@ -1,8 +1,8 @@
 package com.codecool.company_car.service.implementation;
 
-import com.codecool.company_car.command.DriverCommand;
-import com.codecool.company_car.converter.DriverCommandToDriver;
-import com.codecool.company_car.converter.DriverToDriverCommand;
+import com.codecool.company_car.dto.DriverDto;
+import com.codecool.company_car.converter.DriverDtoToDriver;
+import com.codecool.company_car.converter.DriverToDriverDto;
 import com.codecool.company_car.model.Driver;
 import com.codecool.company_car.repository.DriverRepository;
 import com.codecool.company_car.service.DriverService;
@@ -17,13 +17,13 @@ import java.util.stream.Collectors;
 public class DriverServiceImpl implements DriverService {
 
     private final DriverRepository driverRepository;
-    private final DriverCommandToDriver driverCommandToDriver;
-    private final DriverToDriverCommand driverToDriverCommand;
+    private final DriverDtoToDriver driverDtoToDriver;
+    private final DriverToDriverDto driverToDriverDto;
 
-    public DriverServiceImpl(DriverRepository driverRepository, DriverCommandToDriver driverCommandToDriver, DriverToDriverCommand driverToDriverCommand) {
+    public DriverServiceImpl(DriverRepository driverRepository, DriverDtoToDriver driverDtoToDriver, DriverToDriverDto driverToDriverDto) {
         this.driverRepository = driverRepository;
-        this.driverCommandToDriver = driverCommandToDriver;
-        this.driverToDriverCommand = driverToDriverCommand;
+        this.driverDtoToDriver = driverDtoToDriver;
+        this.driverToDriverDto = driverToDriverDto;
     }
 
     @Override
@@ -43,10 +43,10 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public DriverCommand saveDriverCommand(DriverCommand command) {
-        Driver driver = driverCommandToDriver.convert(command);
+    public DriverDto saveDriverCommand(DriverDto command) {
+        Driver driver = driverDtoToDriver.convert(command);
         Driver savedDriver = driverRepository.save(driver);
-        return driverToDriverCommand.convert(savedDriver);
+        return driverToDriverDto.convert(savedDriver);
     }
 
     @Override

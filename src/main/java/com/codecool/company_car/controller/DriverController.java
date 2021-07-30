@@ -1,6 +1,6 @@
 package com.codecool.company_car.controller;
 
-import com.codecool.company_car.command.DriverCommand;
+import com.codecool.company_car.dto.DriverDto;
 import com.codecool.company_car.model.Driver;
 import com.codecool.company_car.service.CityService;
 import com.codecool.company_car.service.DriverService;
@@ -33,12 +33,12 @@ public class DriverController {
     }
 
     @PostMapping
-    public void add(@RequestBody DriverCommand command) {
+    public void add(@RequestBody DriverDto command) {
         driverService.saveDriverCommand(command);
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody DriverCommand command, @PathVariable("id") Long id) {
+    public void update(@RequestBody DriverDto command, @PathVariable("id") Long id) {
         command.setDriverId(id);
         driverService.saveDriverCommand(command);
     }

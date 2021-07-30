@@ -1,6 +1,6 @@
 package com.codecool.company_car.service;
 
-import com.codecool.company_car.command.DriverCommand;
+import com.codecool.company_car.dto.DriverDto;
 import com.codecool.company_car.model.Driver;
 
 import java.util.List;
@@ -11,7 +11,7 @@ public interface DriverService {
 
     Driver findById(Long id);
 
-    DriverCommand saveDriverCommand(DriverCommand command);
+    DriverDto saveDriverCommand(DriverDto command);
 
     void deleteById(Long id);
 

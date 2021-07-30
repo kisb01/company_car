@@ -1,8 +1,8 @@
 package com.codecool.company_car.service.implementation;
 
-import com.codecool.company_car.command.ColorCommand;
-import com.codecool.company_car.converter.ColorCommandToColor;
-import com.codecool.company_car.converter.ColorToColorCommand;
+import com.codecool.company_car.dto.ColorDto;
+import com.codecool.company_car.converter.ColorDtoToColor;
+import com.codecool.company_car.converter.ColorToColorDto;
 import com.codecool.company_car.model.Color;
 import com.codecool.company_car.repository.ColorRepository;
 import com.codecool.company_car.service.ColorService;
@@ -16,13 +16,13 @@ import java.util.*;
 public class ColorServiceImpl implements ColorService {
 
     private final ColorRepository colorRepository;
-    private final ColorToColorCommand colorToColorCommand;
-    private final ColorCommandToColor colorCommandToColor;
+    private final ColorToColorDto colorToColorDto;
+    private final ColorDtoToColor colorDtoToColor;
 
-    public ColorServiceImpl(ColorRepository colorRepository, ColorToColorCommand colorToColorCommand, ColorCommandToColor colorCommandToColor) {
+    public ColorServiceImpl(ColorRepository colorRepository, ColorToColorDto colorToColorDto, ColorDtoToColor colorDtoToColor) {
         this.colorRepository = colorRepository;
-        this.colorToColorCommand = colorToColorCommand;
-        this.colorCommandToColor = colorCommandToColor;
+        this.colorToColorDto = colorToColorDto;
+        this.colorDtoToColor = colorDtoToColor;
     }
 
     @Override
@@ -42,10 +42,10 @@ public class ColorServiceImpl implements ColorService {
     }
 
     @Override
-    public ColorCommand saveColorCommand(ColorCommand command) {
-        Color color = colorCommandToColor.convert(command);
+    public ColorDto saveColorCommand(ColorDto command) {
+        Color color = colorDtoToColor.convert(command);
         Color savedColor = colorRepository.save(color);
-        return colorToColorCommand.convert(savedColor);
+        return colorToColorDto.convert(savedColor);
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.codecool.company_car.service.implementation;
 
-import com.codecool.company_car.command.ManufacturerCommand;
-import com.codecool.company_car.converter.ManufacturerCommandToManufacturer;
-import com.codecool.company_car.converter.ManufacturerToManufacturerCommand;
+import com.codecool.company_car.dto.ManufacturerDto;
+import com.codecool.company_car.converter.ManufacturerDtoToManufacturer;
+import com.codecool.company_car.converter.ManufacturerToManufacturerDto;
 import com.codecool.company_car.model.Manufacturer;
 import com.codecool.company_car.repository.ManufacturerRepository;
 import com.codecool.company_car.service.ManufacturerService;
@@ -16,13 +16,13 @@ import java.util.*;
 public class ManufacturerServiceImpl implements ManufacturerService {
 
     private final ManufacturerRepository manufacturerRepository;
-    private final ManufacturerToManufacturerCommand manufacturerToManufacturerCommand;
-    private final ManufacturerCommandToManufacturer manufacturerCommandToManufacturer;
+    private final ManufacturerToManufacturerDto manufacturerToManufacturerDto;
+    private final ManufacturerDtoToManufacturer manufacturerDtoToManufacturer;
 
-    public ManufacturerServiceImpl(ManufacturerRepository manufacturerRepository, ManufacturerToManufacturerCommand manufacturerToManufacturerCommand, ManufacturerCommandToManufacturer manufacturerCommandToManufacturer) {
+    public ManufacturerServiceImpl(ManufacturerRepository manufacturerRepository, ManufacturerToManufacturerDto manufacturerToManufacturerDto, ManufacturerDtoToManufacturer manufacturerDtoToManufacturer) {
         this.manufacturerRepository = manufacturerRepository;
-        this.manufacturerToManufacturerCommand = manufacturerToManufacturerCommand;
-        this.manufacturerCommandToManufacturer = manufacturerCommandToManufacturer;
+        this.manufacturerToManufacturerDto = manufacturerToManufacturerDto;
+        this.manufacturerDtoToManufacturer = manufacturerDtoToManufacturer;
     }
 
     @Override
@@ -42,10 +42,10 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     }
 
     @Override
-    public ManufacturerCommand saveManufacturerCommand(ManufacturerCommand command) {
-        Manufacturer manufacturer = manufacturerCommandToManufacturer.convert(command);
+    public ManufacturerDto saveManufacturerCommand(ManufacturerDto command) {
+        Manufacturer manufacturer = manufacturerDtoToManufacturer.convert(command);
         Manufacturer savedManufacturer = manufacturerRepository.save(manufacturer);
-        return manufacturerToManufacturerCommand.convert(savedManufacturer);
+        return manufacturerToManufacturerDto.convert(savedManufacturer);
     }
 
     @Override

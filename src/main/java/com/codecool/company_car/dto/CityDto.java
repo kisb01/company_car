@@ -1,6 +1,5 @@
-package com.codecool.company_car.command;
+package com.codecool.company_car.dto;
 
-import com.codecool.company_car.annotation.Name;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CityCommand {
+public class CityDto {
 
     private Long id;
 

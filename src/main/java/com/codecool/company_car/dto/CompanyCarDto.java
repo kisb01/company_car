@@ -1,4 +1,4 @@
-package com.codecool.company_car.command;
+package com.codecool.company_car.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-public class CompanyCarCommand {
+public class CompanyCarDto {
 
     private Long id;
     private String licencePlateNumber;

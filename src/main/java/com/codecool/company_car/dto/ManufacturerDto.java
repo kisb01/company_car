@@ -1,4 +1,4 @@
-package com.codecool.company_car.command;
+package com.codecool.company_car.dto;
 
 import com.codecool.company_car.annotation.Name;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ManufacturerCommand {
+public class ManufacturerDto {
 
     private Long id;
     @Name(message = "Manufacturer name can not be null")

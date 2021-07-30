@@ -1,8 +1,8 @@
 package com.codecool.company_car.service.implementation;
 
-import com.codecool.company_car.command.CompanyCarCommand;
-import com.codecool.company_car.converter.CompanyCarCommandToCompanyCar;
-import com.codecool.company_car.converter.CompanyCarToCompanyCarCommand;
+import com.codecool.company_car.dto.CompanyCarDto;
+import com.codecool.company_car.converter.CompanyCarDtoToCompanyCar;
+import com.codecool.company_car.converter.CompanyCarToCompanyCarDto;
 import com.codecool.company_car.model.CompanyCar;
 import com.codecool.company_car.repository.CompanyCarRepository;
 import com.codecool.company_car.service.CompanyCarService;
@@ -17,13 +17,13 @@ import java.util.stream.Collectors;
 public class CompanyCarServiceImpl implements CompanyCarService {
 
     private final CompanyCarRepository companyCarRepository;
-    private final CompanyCarCommandToCompanyCar companyCarCommandToCompanyCar;
-    private final CompanyCarToCompanyCarCommand companyCarToCompanyCarCommand;
+    private final CompanyCarDtoToCompanyCar companyCarDtoToCompanyCar;
+    private final CompanyCarToCompanyCarDto companyCarToCompanyCarDto;
 
-    public CompanyCarServiceImpl(CompanyCarRepository companyCarRepository, CompanyCarCommandToCompanyCar companyCarCommandToCompanyCar, CompanyCarToCompanyCarCommand companyCarToCompanyCarCommand) {
+    public CompanyCarServiceImpl(CompanyCarRepository companyCarRepository, CompanyCarDtoToCompanyCar companyCarDtoToCompanyCar, CompanyCarToCompanyCarDto companyCarToCompanyCarDto) {
         this.companyCarRepository = companyCarRepository;
-        this.companyCarCommandToCompanyCar = companyCarCommandToCompanyCar;
-        this.companyCarToCompanyCarCommand = companyCarToCompanyCarCommand;
+        this.companyCarDtoToCompanyCar = companyCarDtoToCompanyCar;
+        this.companyCarToCompanyCarDto = companyCarToCompanyCarDto;
     }
 
     @Override
@@ -43,10 +43,10 @@ public class CompanyCarServiceImpl implements CompanyCarService {
     }
 
     @Override
-    public CompanyCarCommand saveCompanyCarCommand(CompanyCarCommand command) {
-        CompanyCar companyCar = companyCarCommandToCompanyCar.convert(command);
+    public CompanyCarDto saveCompanyCarCommand(CompanyCarDto command) {
+        CompanyCar companyCar = companyCarDtoToCompanyCar.convert(command);
         CompanyCar savedCompanyCar = companyCarRepository.save(companyCar);
-        return companyCarToCompanyCarCommand.convert(savedCompanyCar);
+        return companyCarToCompanyCarDto.convert(savedCompanyCar);
     }
 
     @Override

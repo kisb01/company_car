@@ -1,6 +1,6 @@
 package com.codecool.company_car.service;
 
-import com.codecool.company_car.command.CompanyCarCommand;
+import com.codecool.company_car.dto.CompanyCarDto;
 import com.codecool.company_car.model.CompanyCar;
 
 import java.util.List;
@@ -11,7 +11,7 @@ public interface CompanyCarService {
 
     CompanyCar findById(Long id);
 
-    CompanyCarCommand saveCompanyCarCommand(CompanyCarCommand command);
+    CompanyCarDto saveCompanyCarCommand(CompanyCarDto command);
 
     void deleteById(Long id);
 

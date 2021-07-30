@@ -6,7 +6,6 @@ import java.time.LocalDate;
 
 public class PastMoreThan18YearsValidator implements ConstraintValidator<PastMoreThan18Years, LocalDate> {
 
-
     @Override
     public void initialize(PastMoreThan18Years constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);

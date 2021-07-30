@@ -1,6 +1,6 @@
 package com.codecool.company_car.controller;
 
-import com.codecool.company_car.command.ColorCommand;
+import com.codecool.company_car.dto.ColorDto;
 import com.codecool.company_car.model.Color;
 import com.codecool.company_car.service.ColorService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,12 +30,12 @@ public class ColorController {
     }
 
     @PostMapping
-    public void add(@RequestBody ColorCommand command) {
+    public void add(@RequestBody ColorDto command) {
         colorService.saveColorCommand(command);
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody ColorCommand command, @PathVariable("id") Long id) {
+    public void update(@RequestBody ColorDto command, @PathVariable("id") Long id) {
         command.setId(id);
         colorService.saveColorCommand(command);
     }

@@ -1,4 +1,4 @@
-package com.codecool.company_car.command;
+package com.codecool.company_car.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ColorCommand {
+public class ColorDto {
 
     private Long id;
 

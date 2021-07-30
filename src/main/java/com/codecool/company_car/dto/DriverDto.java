@@ -1,4 +1,4 @@
-package com.codecool.company_car.command;
+package com.codecool.company_car.dto;
 
 import com.codecool.company_car.annotation.PastMoreThan18Years;
 import lombok.Getter;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
-public class DriverCommand {
+public class DriverDto {
 
     private Long driverId;
     private String firstName;

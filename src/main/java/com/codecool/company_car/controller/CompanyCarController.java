@@ -1,6 +1,6 @@
 package com.codecool.company_car.controller;
 
-import com.codecool.company_car.command.CompanyCarCommand;
+import com.codecool.company_car.dto.CompanyCarDto;
 import com.codecool.company_car.model.CompanyCar;
 import com.codecool.company_car.service.CompanyCarService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,12 +30,12 @@ public class CompanyCarController {
     }
 
     @PostMapping
-    public void add(@RequestBody CompanyCarCommand command) {
+    public void add(@RequestBody CompanyCarDto command) {
         companyCarService.saveCompanyCarCommand(command);
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody CompanyCarCommand command, @PathVariable("id") Long id) {
+    public void update(@RequestBody CompanyCarDto command, @PathVariable("id") Long id) {
         command.setId(id);
         companyCarService.saveCompanyCarCommand(command);
     }

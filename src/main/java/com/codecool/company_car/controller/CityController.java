@@ -1,10 +1,9 @@
 package com.codecool.company_car.controller;
 
-import com.codecool.company_car.command.CityCommand;
+import com.codecool.company_car.dto.CityDto;
 import com.codecool.company_car.model.City;
 import com.codecool.company_car.service.CityService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.format.annotation.NumberFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +34,7 @@ public class CityController {
     }
 
     @PostMapping
-    public ResponseEntity<CityCommand> add(@Valid @RequestBody CityCommand command, BindingResult bindingResult) {
+    public ResponseEntity<CityDto> add(@Valid @RequestBody CityDto command, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().build();
         }
@@ -43,7 +42,7 @@ public class CityController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CityCommand> update(@Valid @RequestBody CityCommand command, @PathVariable("id") Long id, BindingResult bindingResult) {
+    public ResponseEntity<CityDto> update(@Valid @RequestBody CityDto command, @PathVariable("id") Long id, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResponseEntity.badRequest().build();
         }

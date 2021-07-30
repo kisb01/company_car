@@ -1,6 +1,6 @@
 package com.codecool.company_car.converter;
 
-import com.codecool.company_car.command.DriverCommand;
+import com.codecool.company_car.dto.DriverDto;
 import com.codecool.company_car.model.City;
 import com.codecool.company_car.model.Driver;
 import lombok.Synchronized;
@@ -9,12 +9,12 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DriverCommandToDriver implements Converter<DriverCommand, Driver> {
+public class DriverDtoToDriver implements Converter<DriverDto, Driver> {
 
     @Synchronized
     @Nullable
     @Override
-    public Driver convert(DriverCommand source) {
+    public Driver convert(DriverDto source) {
         if (source == null) return null;
         final Driver driver = new Driver();
         driver.setDriverId(source.getDriverId());
