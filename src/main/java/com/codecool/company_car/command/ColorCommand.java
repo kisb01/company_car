@@ -10,5 +10,6 @@ import lombok.Setter;
 public class ColorCommand {
 
     private Long id;
+
     private String name;
 }

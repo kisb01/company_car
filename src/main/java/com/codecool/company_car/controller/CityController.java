@@ -4,11 +4,13 @@ import com.codecool.company_car.command.CityCommand;
 import com.codecool.company_car.model.City;
 import com.codecool.company_car.service.CityService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Slf4j
@@ -28,7 +30,7 @@ public class CityController {
     }
 
     @GetMapping("/{id}")
-    public City findById(@PathVariable("id") Long id) {
+    public City findById(@PathVariable("id") @NotNull Long id) {
         return cityService.findById(id);
     }
 

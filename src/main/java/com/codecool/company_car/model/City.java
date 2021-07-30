@@ -1,12 +1,12 @@
 package com.codecool.company_car.model;
 
+import com.codecool.company_car.annotation.Name;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+    @Name(message = "City name can not be null")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
     private List<Driver> drivers = new ArrayList<>();

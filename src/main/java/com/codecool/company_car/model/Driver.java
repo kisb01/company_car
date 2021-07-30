@@ -1,13 +1,13 @@
 package com.codecool.company_car.model;
 
+import com.codecool.company_car.annotation.Name;
+import com.codecool.company_car.annotation.PastMoreThan18Years;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Past;
 import java.time.LocalDate;
 
 @NoArgsConstructor
@@ -21,17 +21,17 @@ public class Driver {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long driverId;
 
-    @NotBlank
+    @Name(message = "Name can not be null")
     private String firstName;
 
-    @NotBlank
+    @Name(message = "Name can not be null")
     private String lastName;
 
     @OneToOne(mappedBy = "driver")
     private CompanyCar companyCar;
     @ManyToOne
     private City city;
-    @Past
+    @PastMoreThan18Years
     private LocalDate birthDate;
 
     public Driver(Long driverId, String firstName, String lastName, City city, LocalDate birthDate) {

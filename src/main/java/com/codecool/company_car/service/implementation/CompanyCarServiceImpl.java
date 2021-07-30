@@ -55,7 +55,7 @@ public class CompanyCarServiceImpl implements CompanyCarService {
     }
 
     @Override
-    public CompanyCar findByDriver(String name) {
+    public List<CompanyCar> findByDriver(String name) {
         return companyCarRepository.findByDriverName(name);
     }
 

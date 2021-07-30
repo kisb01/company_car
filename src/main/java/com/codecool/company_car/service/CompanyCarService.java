@@ -15,7 +15,7 @@ public interface CompanyCarService {
 
     void deleteById(Long id);
 
-    CompanyCar findByDriver(String name);
+    List<CompanyCar> findByDriver(String name);
 
     List<CompanyCar> findAllByManufacturer(String name);
 

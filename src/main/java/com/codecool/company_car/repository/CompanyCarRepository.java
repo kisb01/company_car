@@ -12,6 +12,6 @@ public interface CompanyCarRepository extends JpaRepository<CompanyCar, Long> {
     List<CompanyCar> findAllInCity(String name);
 
     @Query("from CompanyCar c where c.driver.firstName like %:name% or c.driver.lastName like %:name%")
-    CompanyCar findByDriverName(String name);
+    List<CompanyCar> findByDriverName(String name);
 
 }

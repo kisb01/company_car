@@ -46,7 +46,7 @@ public class CompanyCarController {
     }
 
     @GetMapping("/driver")
-    public CompanyCar findByDriver(@RequestParam String name) {
+    public List<CompanyCar> findByDriver(@RequestParam String name) {
         return companyCarService.findByDriver(name);
     }
 

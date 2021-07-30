@@ -43,9 +43,8 @@ class CompanyCarApplicationTests {
             add(new Driver(1L, "Eszter Enikő", "Biró-Kányási", new City(4L, "Miskolc"), LocalDate.of(1993, 9, 17)));
         }};
         ResponseEntity<Driver[]> responseEntity = restTemplate.getForEntity(BASE_URL + "/driver/name?city=Miskolc", Driver[].class);
-        List<Driver> actual = new ArrayList<>(Arrays.asList(responseEntity.getBody()));
-        boolean isReady = expected.get(0).getFirstName().equals(actual.get(0).getFirstName());
-        Assertions.assertTrue(isReady);
+        List<Driver> actual = Arrays.asList(responseEntity.getBody());
+        Assertions.assertEquals(expected.get(0).getFirstName(), actual.get(0).getFirstName());
     }
 
     @Test
@@ -60,7 +59,45 @@ class CompanyCarApplicationTests {
 
     @Test
     public void testFindAllByManufacturer() {
-
+        List<CompanyCar> expected = new ArrayList<>() {{
+            add(new CompanyCar(1L, "IIL-215", new Manufacturer(1L, "Opel"), "Corsa", new Color(4L, "Grey"),
+                    new Driver(), LocalDate.of(2002, 12, 5), false));
+        }};
+        ResponseEntity<CompanyCar[]> responseEntity = restTemplate.getForEntity(BASE_URL + "/companycar/manufacturer?name=Opel", CompanyCar[].class);
+        List<CompanyCar> actual = Arrays.asList(responseEntity.getBody());
+        Assertions.assertEquals(expected.get(0).getLicencePlateNumber(), actual.get(0).getLicencePlateNumber());
     }
 
+    @Test
+    public void testFindAllByColor() {
+        List<CompanyCar> expected = new ArrayList<>() {{
+            add(new CompanyCar(1L, "IIL-215", new Manufacturer(1L, "Opel"), "Corsa", new Color(4L, "Grey"),
+                    new Driver(), LocalDate.of(2002, 12, 5), false));
+        }};
+        ResponseEntity<CompanyCar[]> responseEntity = restTemplate.getForEntity(BASE_URL + "/companycar/color?name=Grey", CompanyCar[].class);
+        List<CompanyCar> actual = Arrays.asList(responseEntity.getBody());
+        Assertions.assertEquals(expected.get(0).getLicencePlateNumber(), actual.get(0).getLicencePlateNumber());
+    }
+
+    @Test
+    public void testFindAllNeedsRepair() {
+        List<CompanyCar> expected = new ArrayList<>() {{
+            add(new CompanyCar(4L, "FPP-187", new Manufacturer(1L, "BMW"), "X3", new Color(2L, "Red"),
+                    new Driver(), LocalDate.of(2011, 4, 23), true));
+        }};
+        ResponseEntity<CompanyCar[]> responseEntity = restTemplate.getForEntity(BASE_URL + "/companycar/repair", CompanyCar[].class);
+        List<CompanyCar> actual = Arrays.asList(responseEntity.getBody());
+        Assertions.assertEquals(expected.get(0).getLicencePlateNumber(), actual.get(0).getLicencePlateNumber());
+    }
+
+    @Test
+    public void testFindAllInCity() {
+        List<CompanyCar> expected = new ArrayList<>() {{
+            add(new CompanyCar(1L, "IIL-215", new Manufacturer(1L, "Opel"), "Corsa", new Color(4L, "Grey"),
+                    new Driver(), LocalDate.of(2002, 12, 5), false));
+        }};
+        ResponseEntity<CompanyCar[]> responseEntity = restTemplate.getForEntity(BASE_URL + "/companycar/city?name=Miskolc", CompanyCar[].class);
+        List<CompanyCar> actual = Arrays.asList(responseEntity.getBody());
+        Assertions.assertEquals(expected.get(0).getLicencePlateNumber(), actual.get(0).getLicencePlateNumber());
+    }
 }
