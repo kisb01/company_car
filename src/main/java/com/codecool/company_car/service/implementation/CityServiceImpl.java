@@ -3,6 +3,7 @@ package com.codecool.company_car.service.implementation;
 import com.codecool.company_car.dto.CityDto;
 import com.codecool.company_car.converter.CityDtoToCity;
 import com.codecool.company_car.converter.CityToCityDto;
+import com.codecool.company_car.exception.CityNotFoundException;
 import com.codecool.company_car.model.City;
 import com.codecool.company_car.repository.CityRepository;
 import com.codecool.company_car.service.CityService;
@@ -38,7 +39,7 @@ public class CityServiceImpl implements CityService {
     public City findById(Long id) {
         Optional<City> optionalCity = cityRepository.findById(id);
         if (optionalCity.isEmpty()) {
-            throw new RuntimeException("No City found");
+            throw new CityNotFoundException("No City found with id " + id);
         }
         return optionalCity.get();
     }
