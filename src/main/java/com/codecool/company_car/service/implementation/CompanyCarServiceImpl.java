@@ -1,15 +1,18 @@
 package com.codecool.company_car.service.implementation;
 
-import com.codecool.company_car.dto.CompanyCarDto;
 import com.codecool.company_car.converter.CompanyCarDtoToCompanyCar;
 import com.codecool.company_car.converter.CompanyCarToCompanyCarDto;
+import com.codecool.company_car.dto.CompanyCarDto;
+import com.codecool.company_car.exception.CompanyCarNotFoundException;
 import com.codecool.company_car.model.CompanyCar;
 import com.codecool.company_car.repository.CompanyCarRepository;
 import com.codecool.company_car.service.CompanyCarService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -37,7 +40,7 @@ public class CompanyCarServiceImpl implements CompanyCarService {
     public CompanyCar findById(Long id) {
         Optional<CompanyCar> optionalCompanyCar = companyCarRepository.findById(id);
         if (optionalCompanyCar.isEmpty()) {
-            throw new RuntimeException("No Car found");
+            throw new CompanyCarNotFoundException("No Car found with id " + id);
         }
         return optionalCompanyCar.get();
     }

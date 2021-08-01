@@ -1,15 +1,18 @@
 package com.codecool.company_car.service.implementation;
 
-import com.codecool.company_car.dto.DriverDto;
 import com.codecool.company_car.converter.DriverDtoToDriver;
 import com.codecool.company_car.converter.DriverToDriverDto;
+import com.codecool.company_car.dto.DriverDto;
+import com.codecool.company_car.exception.DriverNotFoundException;
 import com.codecool.company_car.model.Driver;
 import com.codecool.company_car.repository.DriverRepository;
 import com.codecool.company_car.service.DriverService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -37,7 +40,7 @@ public class DriverServiceImpl implements DriverService {
     public Driver findById(Long id) {
         Optional<Driver> optionalDriver = driverRepository.findById(id);
         if (optionalDriver.isEmpty()) {
-            throw new RuntimeException("No Driver found");
+            throw new DriverNotFoundException("No Driver found with id " + id);
         }
         return optionalDriver.get();
     }

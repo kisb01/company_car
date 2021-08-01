@@ -1,15 +1,18 @@
 package com.codecool.company_car.service.implementation;
 
-import com.codecool.company_car.dto.ColorDto;
 import com.codecool.company_car.converter.ColorDtoToColor;
 import com.codecool.company_car.converter.ColorToColorDto;
+import com.codecool.company_car.dto.ColorDto;
+import com.codecool.company_car.exception.ColorNotFoundException;
 import com.codecool.company_car.model.Color;
 import com.codecool.company_car.repository.ColorRepository;
 import com.codecool.company_car.service.ColorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -36,7 +39,7 @@ public class ColorServiceImpl implements ColorService {
     public Color findById(Long id) {
         Optional<Color> optionalColor = colorRepository.findById(id);
         if (optionalColor.isEmpty()) {
-            throw new RuntimeException("No Color found");
+            throw new ColorNotFoundException("No Color found with id " + id);
         }
         return optionalColor.get();
     }

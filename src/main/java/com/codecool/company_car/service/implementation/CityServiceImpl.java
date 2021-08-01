@@ -1,8 +1,8 @@
 package com.codecool.company_car.service.implementation;
 
-import com.codecool.company_car.dto.CityDto;
 import com.codecool.company_car.converter.CityDtoToCity;
 import com.codecool.company_car.converter.CityToCityDto;
+import com.codecool.company_car.dto.CityDto;
 import com.codecool.company_car.exception.CityNotFoundException;
 import com.codecool.company_car.model.City;
 import com.codecool.company_car.repository.CityRepository;

@@ -1,15 +1,18 @@
 package com.codecool.company_car.service.implementation;
 
-import com.codecool.company_car.dto.ManufacturerDto;
 import com.codecool.company_car.converter.ManufacturerDtoToManufacturer;
 import com.codecool.company_car.converter.ManufacturerToManufacturerDto;
+import com.codecool.company_car.dto.ManufacturerDto;
+import com.codecool.company_car.exception.ManufacturerNotFoundException;
 import com.codecool.company_car.model.Manufacturer;
 import com.codecool.company_car.repository.ManufacturerRepository;
 import com.codecool.company_car.service.ManufacturerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -36,7 +39,7 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     public Manufacturer findById(Long id) {
         Optional<Manufacturer> optionalManufacturer = manufacturerRepository.findById(id);
         if (optionalManufacturer.isEmpty()) {
-            throw new RuntimeException("No Manufacturer found");
+            throw new ManufacturerNotFoundException("No Manufacturer found with id " + id);
         }
         return optionalManufacturer.get();
     }
