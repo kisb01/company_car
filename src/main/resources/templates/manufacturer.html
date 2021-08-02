@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="parts::header">
+    <title id="title"> Manufacturer </title>
+</head>
+<body>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <nav th:include="parts::navbar">
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <p class="h2 text-center">
+                <th:block th:text="${manufacturer.id == null ? 'Add Manufacturer' : 'Update Manufacturer'}"></th:block>
+            </p>
+            <form th:object="${manufacturer}" th:action="@{/manufacturer}" method="POST">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group">
+                    <label for="picture-title">Manufacturer</label>
+                    <input type="text" class="form-control" id="picture-title" aria-describedby="picture-title-help" placeholder="Enter Title" th:field="*{name}">
+                    <small id="picture-title-help" class="form-text text-muted">Add a manufacturer</small>
+                </div>
+                <div class="text-center">
+                    <input class="btn btn-primary" type="submit" th:value="${manufacturer.id == null ? 'Save' : 'Update'}"/>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th scope="col">Manufacturer</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="manufacturer: ${manufacturers}">
+                    <th th:text="${manufacturer.id}"></th>
+                    <td th:text="${manufacturer.name}"></td>
+                    <td>
+                        <a class="btn btn-secondary" th:href="@{'/manufacturer/' + ${manufacturer.id} + '/update'}" role="button">Update</a>
+                        <a class="btn btn-danger" th:href="@{'/manufacturer/' + ${manufacturer.id} + '/delete'}" role="button">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

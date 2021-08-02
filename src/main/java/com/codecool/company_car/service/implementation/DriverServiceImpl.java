@@ -46,8 +46,13 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public DriverDto saveDriverCommand(DriverDto command) {
-        Driver driver = driverDtoToDriver.convert(command);
+    public DriverDto findDtoById(Long id) {
+        return driverToDriverDto.convert(findById(id));
+    }
+
+    @Override
+    public DriverDto saveDriverDto(DriverDto driverDto) {
+        Driver driver = driverDtoToDriver.convert(driverDto);
         Driver savedDriver = driverRepository.save(driver);
         return driverToDriverDto.convert(savedDriver);
     }

@@ -45,8 +45,13 @@ public class ColorServiceImpl implements ColorService {
     }
 
     @Override
-    public ColorDto saveColorCommand(ColorDto command) {
-        Color color = colorDtoToColor.convert(command);
+    public ColorDto findDtoById(Long id) {
+        return colorToColorDto.convert(findById(id));
+    }
+
+    @Override
+    public ColorDto saveColorDto(ColorDto colorDto) {
+        Color color = colorDtoToColor.convert(colorDto);
         Color savedColor = colorRepository.save(color);
         return colorToColorDto.convert(savedColor);
     }

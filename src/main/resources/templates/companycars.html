@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="parts::header">
+    <title id="title"> Company Cars </title>
+</head>
+<body>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <nav th:include="parts::navbar">
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <p class="h2 text-center">
+                <th:block th:text="${companyCar.id == null ? 'Create Car' : 'Update Car'}"></th:block>
+            </p>
+            <form th:object="${companyCar}" th:action="@{/companycars}" method="POST">
+                <input type="hidden" th:field="*{id}">
+                <div class="form-group">
+                    <label for="name">Licence Plate Number</label>
+                    <input type="text" class="form-control" id="name" aria-describedby="name-help" placeholder="Enter Licence Plate Number" th:field="*{licencePlateNumber}">
+                    <small id="name-help" class="form-text text-muted">Give the licence plate number of the car.</small>
+                </div>
+                <div class="form-group">
+                    <label for="rooms">Number Of Rooms</label>
+                    <input type="number" class="form-control" id="rooms" aria-describedby="room-help" min="1" max="20" step="1" th:field="*{numberOfRooms}" />
+                    <small id="room-help" class="form-text text-muted">A number between 1 and 20.</small>
+                </div>
+                <div class="text-center">
+                    <input class="btn btn-primary" type="submit" th:value="${building.id == null ? 'Save' : 'Update'}" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Number Of Rooms</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="building: ${buildings}">
+                    <th th:text="${building.id}"></th>
+                    <td th:text="${building.name}"></td>
+                    <td th:text="${building.numberOfRooms}"></td>
+                    <td>
+                        <a class="btn btn-secondary" th:href="@{'/buildings/' + ${building.id} + '/update'}" role="button">Update</a>
+                        <a class="btn btn-danger" th:href="@{'/buildings/' + ${building.id} + '/delete'}" role="button">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

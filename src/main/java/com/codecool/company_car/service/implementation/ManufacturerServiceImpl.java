@@ -45,8 +45,13 @@ public class ManufacturerServiceImpl implements ManufacturerService {
     }
 
     @Override
-    public ManufacturerDto saveManufacturerCommand(ManufacturerDto command) {
-        Manufacturer manufacturer = manufacturerDtoToManufacturer.convert(command);
+    public ManufacturerDto findDtoById(Long id) {
+        return manufacturerToManufacturerDto.convert(findById(id));
+    }
+
+    @Override
+    public ManufacturerDto saveManufacturerDto(ManufacturerDto manufacturerDto) {
+        Manufacturer manufacturer = manufacturerDtoToManufacturer.convert(manufacturerDto);
         Manufacturer savedManufacturer = manufacturerRepository.save(manufacturer);
         return manufacturerToManufacturerDto.convert(savedManufacturer);
     }

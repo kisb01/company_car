@@ -44,13 +44,18 @@ public class CityServiceImpl implements CityService {
         return optionalCity.get();
     }
 
+    @Override
+    public CityDto findDtoById(Long id) {
+        return cityToCityDto.convert(findById(id));
+    }
+
     public City findByName(String name) {
         return findAll().stream().filter(c -> c.getName().equals(name)).findFirst().get();
     }
 
     @Override
-    public CityDto saveCityCommand(CityDto command) {
-        City city = cityDtoToCity.convert(command);
+    public CityDto saveCityDto(CityDto cityDto) {
+        City city = cityDtoToCity.convert(cityDto);
         City savedCity = cityRepository.save(city);
         return cityToCityDto.convert(savedCity);
     }
