@@ -8,6 +8,8 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 public class DriverDtoToDriver implements Converter<DriverDto, Driver> {
 
@@ -27,7 +29,7 @@ public class DriverDtoToDriver implements Converter<DriverDto, Driver> {
             city.getDrivers().add(driver);
             driver.setCity(city);
         }
-        driver.setBirthDate(source.getBirthDate());
+        driver.setBirthDate(LocalDate.parse(source.getBirthDate()));
         return driver;
     }
 }

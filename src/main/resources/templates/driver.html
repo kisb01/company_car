@@ -1,10 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="parts::header">
+    <title id="title"> Drivers </title>
 </head>
 <body>
+<div class="container-fluid">
 
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <nav th:include="parts::navbar">
+            </nav>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <p class="h2 text-center">
+                <th:block th:text="${driver.driverId == null ? 'Create Driver' : 'Update Driver'}"></th:block>
+            </p>
+            <form th:object="${driver}" th:action="@{/driver}" method="POST">
+                <input type="hidden" th:field="*{driverId}">
+                <div class="form-group">
+                    <label for="firstname">Driver's First Name</label>
+                    <input type="text" class="form-control" id="firstname" aria-describedby="firstname-help" placeholder="Enter First Name" th:field="*{firstName}">
+                    <small id="firstname-help" class="form-text text-muted">Give the driver's first name.</small>
+                </div>
+                <div class="form-group">
+                    <label for="lastname-title">Driver's Last Name</label>
+                    <input type="text" class="form-control" id="lastname-title" aria-describedby="lastname-help" placeholder="Enter Last Name" th:field="*{lastName}">
+                    <small id="lastname-help" class="form-text text-muted">Give the driver's last name.</small>
+                </div>
+                <div class="form-group">
+                    <label for="city-title">City</label>
+                    <select id="city-title" class="form-select" aria-describedby="city-help" th:field="*{cityId}">
+                        <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
+                    </select>
+                    <small id="city-help" class="form-text text-muted">Give the city's name.</small>
+                </div>
+                <div class="form-group">
+                    <label for="birthdate-title">Driver's Birthdate</label>
+                    <input type="date" class="form-control" id="birthdate-title" aria-describedby="birthdate-help" placeholder="Enter birthdate" th:field="*{birthDate}">
+                    <small id="birthdate-help" class="form-text text-muted">Give the driver's birthdate.</small>
+                </div>
+                <div class="text-center">
+                    <input class="btn btn-primary" type="submit" th:value="${driver.driverId == null ? 'Save' : 'Update'}"/>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Birth Date</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="driver: ${drivers}">
+                    <th th:text="${driver.getDriverId()}"></th>
+                    <th th:text="${driver.getFirstName()}"></th>
+                    <td th:text="${driver.getLastName()}"></td>
+                    <td th:text="${driver.getCity().getName()}"></td>
+                    <td th:text="${driver.getBirthDate()}"></td>
+                    <td>
+                        <a class="btn btn-secondary" th:href="@{'/driver/' + ${driver.driverId} + '/update'}" role="button">Update</a>
+                        <a class="btn btn-danger" th:href="@{'/driver/' + ${driver.driverId} + '/delete'}" role="button">Delete</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>

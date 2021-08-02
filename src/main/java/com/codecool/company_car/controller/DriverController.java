@@ -2,6 +2,7 @@ package com.codecool.company_car.controller;
 
 import com.codecool.company_car.dto.DriverDto;
 import com.codecool.company_car.model.Driver;
+import com.codecool.company_car.service.CityService;
 import com.codecool.company_car.service.DriverService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +20,18 @@ import java.util.List;
 public class DriverController {
 
     private final DriverService driverService;
+    private final CityService cityService;
 
-    public DriverController(DriverService driverService) {
+    public DriverController(DriverService driverService, CityService cityService) {
         this.driverService = driverService;
+        this.cityService = cityService;
     }
 
     @GetMapping
     public String getDriverPage(Model model) {
         model.addAttribute("drivers", driverService.findAll());
         model.addAttribute("driver", new DriverDto());
+        model.addAttribute("cities", cityService.findAll());
         return "driver";
     }
 
@@ -43,6 +47,7 @@ public class DriverController {
 
         model.addAttribute("driver", driverDto);
         model.addAttribute("drivers", driverService.findAll());
+        model.addAttribute("cities", cityService.findAll());
         return "driver";
     }
 

@@ -20,7 +20,7 @@ public class DriverToDriverDto implements Converter<Driver, DriverDto> {
         driverDto.setFirstName(source.getFirstName());
         driverDto.setLastName(source.getLastName());
         driverDto.setCityId(source.getCity().getId());
-        driverDto.setBirthDate(source.getBirthDate());
+        driverDto.setBirthDate(source.getBirthDate().toString());
         return driverDto;
     }
 }

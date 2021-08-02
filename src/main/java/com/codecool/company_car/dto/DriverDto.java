@@ -16,6 +16,5 @@ public class DriverDto {
     private String firstName;
     private String lastName;
     private Long cityId;
-    @PastMoreThan18Years
-    private LocalDate birthDate;
+    private String birthDate;
 }
