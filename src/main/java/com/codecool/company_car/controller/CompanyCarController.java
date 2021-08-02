@@ -2,10 +2,12 @@ package com.codecool.company_car.controller;
 
 import com.codecool.company_car.dto.CompanyCarDto;
 import com.codecool.company_car.model.CompanyCar;
-import com.codecool.company_car.service.CompanyCarService;
+import com.codecool.company_car.service.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,21 +18,33 @@ import java.util.List;
 public class CompanyCarController {
 
     private final CompanyCarService companyCarService;
+    private final ColorService colorService;
+    private final ManufacturerService manufacturerService;
+    private final DriverService driverService;
+    private final CityService cityService;
 
-    public CompanyCarController(CompanyCarService companyCarService) {
+    public CompanyCarController(CompanyCarService companyCarService, ColorService colorService, ManufacturerService manufacturerService, DriverService driverService, CityService cityService) {
         this.companyCarService = companyCarService;
+        this.colorService = colorService;
+        this.manufacturerService = manufacturerService;
+        this.driverService = driverService;
+        this.cityService = cityService;
     }
 
     @GetMapping
     public String getCompanyCarPage(Model model) {
         model.addAttribute("companyCars", companyCarService.findAll());
         model.addAttribute("companyCar", new CompanyCarDto());
+        model.addAttribute("colors", colorService.findAll());
+        model.addAttribute("manufacturers", manufacturerService.findAll());
+        model.addAttribute("drivers", driverService.findAllAvailable());
+        model.addAttribute("cities", cityService.findAll());
         return "companycars";
     }
 
     @PostMapping
     public String saveOrUpdateCompanyCar(@ModelAttribute CompanyCarDto companyCarDto) {
-        companyCarService.saveCompanyCarCommand(companyCarDto);
+        companyCarService.saveCompanyCarDto(companyCarDto);
         return "redirect:/companycars";
     }
 
@@ -40,6 +54,10 @@ public class CompanyCarController {
 
         model.addAttribute("companyCar", companyCarDto);
         model.addAttribute("companyCars", companyCarService.findAll());
+        model.addAttribute("colors", colorService.findAll());
+        model.addAttribute("manufacturers", manufacturerService.findAll());
+        model.addAttribute("drivers", driverService.findAllAvailable());
+        model.addAttribute("cities", cityService.findAll());
         return "companycars";
     }
 
@@ -57,21 +75,27 @@ public class CompanyCarController {
 
     @GetMapping("/{id}/get")
     @ResponseBody
-    public CompanyCarDto getCompanyCar(@PathVariable("id") Long id) {
-        return companyCarService.findDtoById(id);
+    public CompanyCar findById(@PathVariable("id") Long id) {
+        return companyCarService.findById(id);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/{id}/get")
     @ResponseBody
-    public void addCompanyCar(@RequestBody CompanyCarDto companyCarDto) {
-        companyCarService.saveCompanyCarCommand(companyCarDto);
+    public ResponseEntity<CompanyCarDto> add(@RequestBody CompanyCarDto companyCarDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.ok(companyCarService.saveCompanyCarDto(companyCarDto));
     }
 
     @PutMapping("/{id}/update")
     @ResponseBody
-    public void updateCompanyCar(@PathVariable("id") Long id, @RequestBody CompanyCarDto companyCarDto) {
+    public ResponseEntity<CompanyCarDto> updateCompanyCar(@PathVariable("id") Long id, @RequestBody CompanyCarDto companyCarDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return ResponseEntity.badRequest().build();
+        }
         companyCarDto.setId(id);
-        companyCarService.saveCompanyCarCommand(companyCarDto);
+        return ResponseEntity.ok(companyCarService.saveCompanyCarDto(companyCarDto));
     }
 
     @DeleteMapping("{id}/delete")
@@ -80,30 +104,10 @@ public class CompanyCarController {
         companyCarService.deleteById(id);
     }
 
-//    @GetMapping
-//    public List<CompanyCar> findAll() {
-//        return companyCarService.findAll();
-//    }
-//
-//    @GetMapping("/{id}")
-//    public CompanyCar findById(@PathVariable("id") Long id) {
-//        return companyCarService.findById(id);
-//    }
-//
-//    @PostMapping
-//    public void add(@RequestBody CompanyCarDto command) {
-//        companyCarService.saveCompanyCarCommand(command);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public void update(@RequestBody CompanyCarDto command, @PathVariable("id") Long id) {
-//        command.setId(id);
-//        companyCarService.saveCompanyCarCommand(command);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public void delete(@PathVariable("id") Long id) {
-//        companyCarService.deleteById(id);
+//    @PostMapping("/add")
+//    @ResponseBody
+//    public void addCompanyCar(@RequestBody CompanyCarDto companyCarDto) {
+//        companyCarService.saveCompanyCarDto(companyCarDto);
 //    }
 
     @GetMapping("/driver")
@@ -116,10 +120,10 @@ public class CompanyCarController {
         return companyCarService.findAllByManufacturer(name);
     }
 
-    @GetMapping("/color")
-    public List<CompanyCar> findAllByColor(@RequestParam String name) {
-        return companyCarService.findAllByColor(name);
-    }
+//    @GetMapping("/color")
+//    public List<CompanyCar> findAllByColor(@RequestParam String name) {
+//        return companyCarService.findAllByColor(name);
+//    }
 
     @GetMapping("/repair")
     public List<CompanyCar> findAllNeedsRepair() {

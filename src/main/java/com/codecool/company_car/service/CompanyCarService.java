@@ -13,7 +13,7 @@ public interface CompanyCarService {
 
     CompanyCarDto findDtoById(Long id);
 
-    CompanyCarDto saveCompanyCarCommand(CompanyCarDto command);
+    CompanyCarDto saveCompanyCarDto(CompanyCarDto command);
 
     void deleteById(Long id);
 

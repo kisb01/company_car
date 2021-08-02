@@ -17,5 +17,7 @@ public interface DriverService {
 
     void deleteById(Long id);
 
+    List<Driver> findAllAvailable();
+
     List<Driver> allDriversFromACity(String name);
 }

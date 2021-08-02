@@ -63,6 +63,11 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    public List<Driver> findAllAvailable() {
+        return driverRepository.findAllAvailable();
+    }
+
+    @Override
     public List<Driver> allDriversFromACity(String name) {
         return findAll().stream().filter(driver -> driver.getCity().getName().equals(name)).collect(Collectors.toList());
     }

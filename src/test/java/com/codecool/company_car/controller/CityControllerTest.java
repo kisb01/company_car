@@ -2,6 +2,7 @@ package com.codecool.company_car.controller;
 
 import com.codecool.company_car.model.City;
 import com.codecool.company_car.service.CityService;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,12 +63,24 @@ class CityControllerTest {
         json.put("id", 1);
         json.put("name", "Budapest");
 
-
         mockMvc.perform(MockMvcRequestBuilders.post("/city")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(String.valueOf(json))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void update_ShouldReturnOK() throws Exception {
+        JSONObject json = new JSONObject();
+        json.put("id", 1);
+        json.put("name", "Budapest");
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/city/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(String.valueOf(json))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 
     @Test

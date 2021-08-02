@@ -10,6 +10,8 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+
 @Component
 public class CompanyCarDtoToCompanyCar implements Converter<CompanyCarDto, CompanyCar> {
 
@@ -44,7 +46,7 @@ public class CompanyCarDtoToCompanyCar implements Converter<CompanyCarDto, Compa
             companyCar.setDriver(driver);
         }
 
-        companyCar.setInUseSince(source.getInUseSince());
+        companyCar.setInUseSince(LocalDate.parse(source.getInUseSince()));
         companyCar.setRepairRequired(source.getRepairRequired());
         return companyCar;
     }

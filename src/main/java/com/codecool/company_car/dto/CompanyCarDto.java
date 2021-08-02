@@ -6,7 +6,6 @@ import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
-import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -21,6 +20,6 @@ public class CompanyCarDto {
     private Long colorId;
     private Long driverId;
     @PastOrPresent
-    private LocalDate inUseSince;
+    private String inUseSince;
     private Boolean repairRequired = false;
 }

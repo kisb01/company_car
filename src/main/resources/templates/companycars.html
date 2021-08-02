@@ -26,36 +26,81 @@
                     <small id="name-help" class="form-text text-muted">Give the licence plate number of the car.</small>
                 </div>
                 <div class="form-group">
-                    <label for="rooms">Number Of Rooms</label>
-                    <input type="number" class="form-control" id="rooms" aria-describedby="room-help" min="1" max="20" step="1" th:field="*{numberOfRooms}" />
-                    <small id="room-help" class="form-text text-muted">A number between 1 and 20.</small>
+                    <label for="manufacturer">City</label>
+                    <select id="manufacturer" class="form-select" aria-describedby="manufacturer-help" th:field="*{manufacturerId}">
+                        <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.id}" th:text="${manufacturer.name}"></option>
+                    </select>
+                    <small id="manufacturer-help" class="form-text text-muted">Add a manufacturer</small>
+                </div>
+                <div class="form-group">
+                    <label for="model">Model</label>
+                    <input type="text" class="form-control" id="model" aria-describedby="model-help" placeholder="Enter model" th:field="*{model}">
+                    <small id="model-help" class="form-text text-muted">Add a model.</small>
+                </div>
+                <div class="form-group">
+                    <label for="color-title">Color</label>
+                    <select id="color-title" class="form-select" aria-describedby="color-help" th:field="*{colorId}">
+                        <option th:each="color : ${colors}" th:value="${color.id}" th:text="${color.name}"></option>
+                    </select>
+                    <small id="color-help" class="form-text text-muted">Add a color</small>
+                </div>
+                <div class="form-group">
+                    <label for="driver">Driver</label>
+                    <select id="driver" class="form-select" aria-describedby="driver-help" th:field="*{driverId}">
+                        <option value="">None</option>
+                        <option th:each="driver : ${drivers}" th:value="${driver.driverId}" th:text="${driver.lastName + ' ' + driver.firstName}"></option>
+                    </select>
+                    <small id="driver-help" class="form-text text-muted">Add a Driver</small>
+                </div>
+                <div class="form-group">
+                    <label for="inuse-title">In use since</label>
+                    <input type="date" class="form-control" id="inuse-title" aria-describedby="inuse-help" placeholder="Enter date of commissioning" th:field="*{inUseSince}">
+                    <small id="inuse-help" class="form-text text-muted">Give the cars date of commissioning</small>
+                </div>
+                <div class="form-group">
+                    <label for="repairRequired">Repair Required</label>
+                    <select id="repairRequired" class="form-select" aria-describedby="repairRequired-help" th:field="*{repairRequired}">
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
+                    <small id="repairRequired-help" class="form-text text-muted">Needs repairing?</small>
                 </div>
                 <div class="text-center">
-                    <input class="btn btn-primary" type="submit" th:value="${building.id == null ? 'Save' : 'Update'}" />
+                    <input class="btn btn-primary" type="submit" th:value="${companyCar.id == null ? 'Save' : 'Update'}" />
                 </div>
             </form>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-10 offset-md-1">
+        <div class="col-md-12">
             <table class="table table-hover">
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Number Of Rooms</th>
+                    <th scope="col">Licence Plate Number</th>
+                    <th scope="col">Manufacturer</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Driver</th>
+                    <th scope="col">In use since</th>
+                    <th scope="col">Repair Required</th>
                     <th scope="col">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="building: ${buildings}">
-                    <th th:text="${building.id}"></th>
-                    <td th:text="${building.name}"></td>
-                    <td th:text="${building.numberOfRooms}"></td>
+                <tr th:each="companyCar : ${companyCars}">
+                    <th th:text="${companyCar.id}"></th>
+                    <td th:text="${companyCar.licencePlateNumber}"></td>
+                    <td th:text="${companyCar.getManufacturer().getName()}"></td>
+                    <td th:text="${companyCar.model}"></td>
+                    <td th:text="${companyCar.getColor().getName()}"></td>
+                    <td th:text="${companyCar.getDriver()} == null ? '-' : ${companyCar.getDriver().getLastName() + ' ' + companyCar.getDriver().getFirstName()}"></td>
+                    <td th:text="${companyCar.inUseSince}"></td>
+                    <td th:text="${companyCar.repairRequired}"></td>
                     <td>
-                        <a class="btn btn-secondary" th:href="@{'/buildings/' + ${building.id} + '/update'}" role="button">Update</a>
-                        <a class="btn btn-danger" th:href="@{'/buildings/' + ${building.id} + '/delete'}" role="button">Delete</a>
+                        <a class="btn btn-secondary" th:href="@{'/companycars/' + ${companyCar.id} + '/update'}" role="button">Update</a>
+                        <a class="btn btn-danger" th:href="@{'/companycars/' + ${companyCar.id} + '/delete'}" role="button">Delete</a>
                     </td>
                 </tr>
                 </tbody>

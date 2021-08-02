@@ -32,7 +32,7 @@ public class CompanyCarToCompanyCarDto implements Converter<CompanyCar, CompanyC
            companyCarDto.setDriverId(source.getDriver().getDriverId());
        }
 
-       companyCarDto.setInUseSince(source.getInUseSince());
+       companyCarDto.setInUseSince(source.getInUseSince().toString());
        companyCarDto.setRepairRequired(source.getRepairRequired());
        return companyCarDto;
     }
