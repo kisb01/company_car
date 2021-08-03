@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -40,5 +41,29 @@ public class MyControllerAdvice {
     public ResponseEntity<String> handleManufacturerException(ManufacturerNotFoundException manufacturerNotFoundException) {
         logger.error(manufacturerNotFoundException.getMessage());
         return new ResponseEntity<>(manufacturerNotFoundException.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
+        logger.error(exception.getMessage());
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CityHasDriverException.class)
+    public ResponseEntity<String> handleCityHasDriverException(CityHasDriverException cityHasDriverException) {
+        logger.error(cityHasDriverException.getMessage());
+        return new ResponseEntity<>(cityHasDriverException.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ColorHasCarException.class)
+    public ResponseEntity<String> handleColorHasCarException(ColorHasCarException colorHasCarException) {
+        logger.error(colorHasCarException.getMessage());
+        return new ResponseEntity<>(colorHasCarException.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ManufacturerHasCarException.class)
+    public ResponseEntity<String> handleManufacturerHasCarException(ManufacturerHasCarException manufacturerHasCarException) {
+        logger.error(manufacturerHasCarException.getMessage());
+        return new ResponseEntity<>(manufacturerHasCarException.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

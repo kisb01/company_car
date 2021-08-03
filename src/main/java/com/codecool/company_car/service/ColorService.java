@@ -11,7 +11,7 @@ public interface ColorService {
 
     Color findById(Long id);
 
-    ColorDto saveColorCommand(ColorDto command);
+    ColorDto saveColorDto(ColorDto colorDto);
 
     void deleteById(Long id);
 }

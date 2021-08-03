@@ -71,6 +71,19 @@ class CityControllerTest {
     }
 
     @Test
+    public void update_ShouldReturnOK() throws Exception {
+        JSONObject json = new JSONObject();
+        json.put("id", 1);
+        json.put("name", "Budapest");
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/city/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(String.valueOf(json))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
     public void delete_ShouldReturnOk() throws Exception {
         JSONObject json = new JSONObject();
         json.put("id", 1);

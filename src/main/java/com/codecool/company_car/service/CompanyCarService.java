@@ -11,7 +11,7 @@ public interface CompanyCarService {
 
     CompanyCar findById(Long id);
 
-    CompanyCarDto saveCompanyCarCommand(CompanyCarDto command);
+    CompanyCarDto saveCompanyCarDto(CompanyCarDto companyCarDto);
 
     void deleteById(Long id);
 

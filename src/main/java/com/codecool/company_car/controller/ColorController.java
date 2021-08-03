@@ -6,6 +6,7 @@ import com.codecool.company_car.service.ColorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -30,14 +31,14 @@ public class ColorController {
     }
 
     @PostMapping
-    public void add(@RequestBody ColorDto command) {
-        colorService.saveColorCommand(command);
+    public void add(@Valid @RequestBody ColorDto colorDto) {
+        colorService.saveColorDto(colorDto);
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody ColorDto command, @PathVariable("id") Long id) {
-        command.setId(id);
-        colorService.saveColorCommand(command);
+    public void update(@Valid @RequestBody ColorDto colorDto, @PathVariable("id") Long id) {
+        colorDto.setId(id);
+        colorService.saveColorDto(colorDto);
     }
 
     @DeleteMapping("/{id}")

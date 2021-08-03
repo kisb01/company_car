@@ -46,8 +46,8 @@ public class CompanyCarServiceImpl implements CompanyCarService {
     }
 
     @Override
-    public CompanyCarDto saveCompanyCarCommand(CompanyCarDto command) {
-        CompanyCar companyCar = companyCarDtoToCompanyCar.convert(command);
+    public CompanyCarDto saveCompanyCarDto(CompanyCarDto companyCarDto) {
+        CompanyCar companyCar = companyCarDtoToCompanyCar.convert(companyCarDto);
         CompanyCar savedCompanyCar = companyCarRepository.save(companyCar);
         return companyCarToCompanyCarDto.convert(savedCompanyCar);
     }

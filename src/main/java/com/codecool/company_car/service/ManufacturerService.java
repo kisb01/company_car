@@ -11,7 +11,7 @@ public interface ManufacturerService {
 
     Manufacturer findById(Long id);
 
-    ManufacturerDto saveManufacturerCommand(ManufacturerDto command);
+    ManufacturerDto saveManufacturerDto(ManufacturerDto manufacturerDto);
 
     void deleteById(Long id);
 }

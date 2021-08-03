@@ -11,7 +11,7 @@ public interface DriverService {
 
     Driver findById(Long id);
 
-    DriverDto saveDriverCommand(DriverDto command);
+    DriverDto saveDriverDto(DriverDto driverDto);
 
     void deleteById(Long id);
 

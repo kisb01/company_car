@@ -21,7 +21,6 @@ public class Manufacturer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manufacturer")
     private List<CompanyCar> companyCars = new ArrayList<>();

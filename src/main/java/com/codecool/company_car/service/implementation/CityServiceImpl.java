@@ -3,6 +3,7 @@ package com.codecool.company_car.service.implementation;
 import com.codecool.company_car.converter.CityDtoToCity;
 import com.codecool.company_car.converter.CityToCityDto;
 import com.codecool.company_car.dto.CityDto;
+import com.codecool.company_car.exception.CityHasDriverException;
 import com.codecool.company_car.exception.CityNotFoundException;
 import com.codecool.company_car.model.City;
 import com.codecool.company_car.repository.CityRepository;
@@ -49,8 +50,8 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
-    public CityDto saveCityCommand(CityDto command) {
-        City city = cityDtoToCity.convert(command);
+    public CityDto saveCityDto(CityDto cityDto) {
+        City city = cityDtoToCity.convert(cityDto);
         City savedCity = cityRepository.save(city);
         return cityToCityDto.convert(savedCity);
     }
@@ -58,7 +59,7 @@ public class CityServiceImpl implements CityService {
     @Override
     public void deleteById(Long id) {
         if (cityRepository.findById(id).get().getDrivers().size() > 0) {
-            throw new RuntimeException("There is at least one driver in the city");
+            throw new CityHasDriverException("There is at least one driver in the city");
         }
         cityRepository.deleteById(id);
     }

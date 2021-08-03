@@ -11,6 +11,6 @@ import lombok.Setter;
 public class ManufacturerDto {
 
     private Long id;
-    @Name(message = "Manufacturer name can not be null")
+    @Name(message = "Manufacturer name can not be blank")
     private String name;
 }

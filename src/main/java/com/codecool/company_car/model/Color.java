@@ -20,7 +20,6 @@ public class Color {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Name(message = "Color name can not be null")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "color")
     private List<CompanyCar> companyCars = new ArrayList<>();

@@ -3,6 +3,7 @@ package com.codecool.company_car.service.implementation;
 import com.codecool.company_car.converter.ColorDtoToColor;
 import com.codecool.company_car.converter.ColorToColorDto;
 import com.codecool.company_car.dto.ColorDto;
+import com.codecool.company_car.exception.ColorHasCarException;
 import com.codecool.company_car.exception.ColorNotFoundException;
 import com.codecool.company_car.model.Color;
 import com.codecool.company_car.repository.ColorRepository;
@@ -45,8 +46,8 @@ public class ColorServiceImpl implements ColorService {
     }
 
     @Override
-    public ColorDto saveColorCommand(ColorDto command) {
-        Color color = colorDtoToColor.convert(command);
+    public ColorDto saveColorDto(ColorDto colorDto) {
+        Color color = colorDtoToColor.convert(colorDto);
         Color savedColor = colorRepository.save(color);
         return colorToColorDto.convert(savedColor);
     }
@@ -54,7 +55,7 @@ public class ColorServiceImpl implements ColorService {
     @Override
     public void deleteById(Long id) {
         if (colorRepository.findById(id).get().getCompanyCars().size() > 0) {
-            throw new RuntimeException("There is at least one company car with this color");
+            throw new ColorHasCarException("There is at least one company car with this color");
         }
         colorRepository.deleteById(id);
     }

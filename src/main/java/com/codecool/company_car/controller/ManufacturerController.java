@@ -6,6 +6,7 @@ import com.codecool.company_car.service.ManufacturerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -30,15 +31,15 @@ public class ManufacturerController {
     }
 
     @PostMapping
-    public void add(@RequestBody ManufacturerDto command) {
-        manufacturerService.saveManufacturerCommand(command);
+    public void add(@Valid @RequestBody ManufacturerDto manufacturerDto) {
+        manufacturerService.saveManufacturerDto(manufacturerDto);
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody ManufacturerDto command,
+    public void update(@Valid @RequestBody ManufacturerDto manufacturerDto,
                        @PathVariable("id") Long id) {
-        command.setId(id);
-        manufacturerService.saveManufacturerCommand(command);
+        manufacturerDto.setId(id);
+        manufacturerService.saveManufacturerDto(manufacturerDto);
     }
 
     @DeleteMapping("/{id}")

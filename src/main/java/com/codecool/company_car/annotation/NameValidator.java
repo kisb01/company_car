@@ -17,7 +17,7 @@ public class NameValidator implements ConstraintValidator<Name, String> {
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
         return s != null &&
                 !s.isBlank() &&
-                s.length() >= 1 &&
+                s.length() >= 2 &&
                 s.length() <= maxLength &&
                 Character.isUpperCase(s.charAt(0));
     }

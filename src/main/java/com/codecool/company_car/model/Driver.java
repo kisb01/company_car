@@ -20,18 +20,13 @@ public class Driver {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long driverId;
-
-    @Name(message = "Name can not be null")
     private String firstName;
-
-    @Name(message = "Name can not be null")
     private String lastName;
 
     @OneToOne(mappedBy = "driver")
     private CompanyCar companyCar;
     @ManyToOne
     private City city;
-    @PastMoreThan18Years
     private LocalDate birthDate;
 
     public Driver(Long driverId, String firstName, String lastName, City city, LocalDate birthDate) {

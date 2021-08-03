@@ -2,11 +2,11 @@ package com.codecool.company_car.controller;
 
 import com.codecool.company_car.dto.DriverDto;
 import com.codecool.company_car.model.Driver;
-import com.codecool.company_car.service.CityService;
 import com.codecool.company_car.service.DriverService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
@@ -15,11 +15,9 @@ import java.util.List;
 public class DriverController {
 
     private final DriverService driverService;
-    private final CityService cityService;
 
-    public DriverController(DriverService driverService, CityService cityService) {
+    public DriverController(DriverService driverService) {
         this.driverService = driverService;
-        this.cityService = cityService;
     }
 
     @GetMapping
@@ -33,14 +31,14 @@ public class DriverController {
     }
 
     @PostMapping
-    public void add(@RequestBody DriverDto command) {
-        driverService.saveDriverCommand(command);
+    public void add(@Valid @RequestBody DriverDto driverDto) {
+        driverService.saveDriverDto(driverDto);
     }
 
     @PutMapping("/{id}")
-    public void update(@RequestBody DriverDto command, @PathVariable("id") Long id) {
-        command.setDriverId(id);
-        driverService.saveDriverCommand(command);
+    public void update(@Valid @RequestBody DriverDto driverDto, @PathVariable("id") Long id) {
+        driverDto.setDriverId(id);
+        driverService.saveDriverDto(driverDto);
     }
 
     @DeleteMapping("/{id}")

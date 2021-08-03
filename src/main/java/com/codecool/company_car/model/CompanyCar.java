@@ -17,7 +17,6 @@ public class CompanyCar {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Pattern(regexp = "([A-Z]{3}[-]*[0-9]{3})")
     private String licencePlateNumber;
 
     @ManyToOne
