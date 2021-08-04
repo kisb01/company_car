@@ -21,7 +21,7 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "city")
     private List<Driver> drivers = new ArrayList<>();
 
     public City(Long id, String name) {

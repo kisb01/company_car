@@ -11,6 +11,6 @@ import lombok.Setter;
 public class ManufacturerDto {
 
     private Long id;
-    @Name(message = "Manufacturer name can not be blank")
+    @Name(message = "Manufacturer name should be at least 2 letters with a capital first letter")
     private String name;
 }

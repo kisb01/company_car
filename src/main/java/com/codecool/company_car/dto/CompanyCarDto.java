@@ -3,6 +3,7 @@ package com.codecool.company_car.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.NotFound;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.PastOrPresent;
@@ -15,14 +16,17 @@ import java.time.LocalDate;
 public class CompanyCarDto {
 
     private Long id;
-    @Pattern(regexp = "([A-Z]{3}[-]*[0-9]{3})")
+    @Pattern(regexp = "([A-Z]{3}[-]*[0-9]{3})", message = "Default Hungarian licence plate pattern: ABC-123")
     private String licencePlateNumber;
+    @NotFound
     private Long manufacturerId;
     @NotBlank(message = "Model name can not be null")
     private String model;
+    @NotFound
     private Long colorId;
+    @NotFound
     private Long driverId;
-    @PastOrPresent
+    @PastOrPresent(message = "Date should be present date or before it")
     private LocalDate inUseSince;
     private Boolean repairRequired = false;
 }

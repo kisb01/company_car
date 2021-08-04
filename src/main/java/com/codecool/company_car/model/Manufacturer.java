@@ -22,7 +22,7 @@ public class Manufacturer {
     private Long id;
 
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manufacturer")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "manufacturer")
     private List<CompanyCar> companyCars = new ArrayList<>();
 
     public Manufacturer(Long id, String name) {

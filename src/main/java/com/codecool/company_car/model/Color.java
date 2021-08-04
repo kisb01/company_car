@@ -21,7 +21,7 @@ public class Color {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "color")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "color")
     private List<CompanyCar> companyCars = new ArrayList<>();
 
     public Color(Long id, String name) {

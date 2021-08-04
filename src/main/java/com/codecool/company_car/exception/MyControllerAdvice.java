@@ -8,6 +8,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.persistence.EntityNotFoundException;
+
 @ControllerAdvice
 public class MyControllerAdvice {
 
@@ -43,12 +45,6 @@ public class MyControllerAdvice {
         return new ResponseEntity<>(manufacturerNotFoundException.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
-        logger.error(exception.getMessage());
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
-    }
-
     @ExceptionHandler(CityHasDriverException.class)
     public ResponseEntity<String> handleCityHasDriverException(CityHasDriverException cityHasDriverException) {
         logger.error(cityHasDriverException.getMessage());
@@ -65,5 +61,23 @@ public class MyControllerAdvice {
     public ResponseEntity<String> handleManufacturerHasCarException(ManufacturerHasCarException manufacturerHasCarException) {
         logger.error(manufacturerHasCarException.getMessage());
         return new ResponseEntity<>(manufacturerHasCarException.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
+        logger.error("Posted entity contains error(s): " + exception.getErrorCount());
+        StringBuilder sb = new StringBuilder();
+        exception.getAllErrors().forEach(err -> {
+            String msg = err.getCode() + " " + err.getDefaultMessage();
+            sb.append(msg).append(System.lineSeparator());
+            logger.error(msg);
+        });
+        return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException exception) {
+        logger.error(exception.getMessage());
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
