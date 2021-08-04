@@ -11,8 +11,6 @@ public interface CityService {
 
     City findById(Long id);
 
-    CityDto findDtoById(Long id);
-
     CityDto saveCityDto(CityDto cityDto);
 
     void deleteById(Long id);

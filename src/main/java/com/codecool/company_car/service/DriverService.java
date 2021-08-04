@@ -11,13 +11,9 @@ public interface DriverService {
 
     Driver findById(Long id);
 
-    DriverDto findDtoById(Long id);
-
     DriverDto saveDriverDto(DriverDto driverDto);
 
     void deleteById(Long id);
-
-    List<Driver> findAllAvailable();
 
     List<Driver> allDriversFromACity(String name);
 }

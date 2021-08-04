@@ -46,11 +46,6 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
-    public DriverDto findDtoById(Long id) {
-        return driverToDriverDto.convert(findById(id));
-    }
-
-    @Override
     public DriverDto saveDriverDto(DriverDto driverDto) {
         Driver driver = driverDtoToDriver.convert(driverDto);
         Driver savedDriver = driverRepository.save(driver);
@@ -60,11 +55,6 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public void deleteById(Long id) {
         driverRepository.deleteById(id);
-    }
-
-    @Override
-    public List<Driver> findAllAvailable() {
-        return driverRepository.findAllAvailable();
     }
 
     @Override
