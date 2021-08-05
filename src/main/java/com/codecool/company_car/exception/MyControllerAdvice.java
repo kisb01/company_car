@@ -66,7 +66,7 @@ public class MyControllerAdvice {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
         logger.error("Posted entity contains error(s): " + exception.getErrorCount());
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder("Posted entity contains error(s): " + exception.getErrorCount()).append(System.lineSeparator());
         exception.getAllErrors().forEach(err -> {
             String msg = err.getCode() + " " + err.getDefaultMessage();
             sb.append(msg).append(System.lineSeparator());

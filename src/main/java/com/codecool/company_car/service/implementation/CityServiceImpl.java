@@ -45,10 +45,6 @@ public class CityServiceImpl implements CityService {
         return optionalCity.get();
     }
 
-    public City findByName(String name) {
-        return findAll().stream().filter(c -> c.getName().equals(name)).findFirst().get();
-    }
-
     @Override
     public CityDto saveCityDto(CityDto cityDto) {
         City city = cityDtoToCity.convert(cityDto);

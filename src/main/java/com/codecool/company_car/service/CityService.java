@@ -15,5 +15,4 @@ public interface CityService {
 
     void deleteById(Long id);
 
-    City findByName(String name);
 }
