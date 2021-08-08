@@ -15,12 +15,12 @@ import java.time.LocalDate;
 public class DriverDto {
 
     private Long driverId;
-    @Name(message = "Name should be at least 2 letters with a capital first letter")
+    @Name(message = "{driver.firstName}")
     private String firstName;
-    @Name(message = "Name should be at least 2 letters with a capital first letter")
+    @Name(message = "{driver.lastName}")
     private String lastName;
     @NotFound
     private Long cityId;
-    @PastMoreThan18Years(message = "Birth date should be at least 18 years in the past.")
+    @PastMoreThan18Years(message = "{driver.birthDate}")
     private LocalDate birthDate;
 }

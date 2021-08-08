@@ -16,17 +16,17 @@ import java.time.LocalDate;
 public class CompanyCarDto {
 
     private Long id;
-    @Pattern(regexp = "([A-Z]{3}[-]*[0-9]{3})", message = "Default Hungarian licence plate pattern: ABC-123")
+    @Pattern(regexp = "([A-Z]{3}[-]*[0-9]{3})", message = "{companyCar.licencePlateNumber}")
     private String licencePlateNumber;
     @NotFound
     private Long manufacturerId;
-    @NotBlank(message = "Model name can not be null")
+    @NotBlank(message = "{companyCar.model}")
     private String model;
     @NotFound
     private Long colorId;
     @NotFound
     private Long driverId;
-    @PastOrPresent(message = "Date should be present date or before it")
+    @PastOrPresent(message = "{companyCar.inUseSince}")
     private LocalDate inUseSince;
     private Boolean repairRequired = false;
 }

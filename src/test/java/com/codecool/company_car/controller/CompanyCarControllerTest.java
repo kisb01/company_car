@@ -19,6 +19,7 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -101,6 +102,11 @@ public class CompanyCarControllerTest {
     }
 
     @Test
+    public void findById_ShouldReturnException() throws Exception {
+        mockMvc.perform(get("/companycar/a")).andExpect(status().isBadRequest());
+    }
+
+    @Test
     public void add_ShouldReturnOK() throws Exception {
         JSONObject companyCar = new JSONObject();
         JSONObject manufacturer = new JSONObject();
@@ -122,6 +128,62 @@ public class CompanyCarControllerTest {
 
 
         mockMvc.perform(MockMvcRequestBuilders.post("/companycar")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(String.valueOf(companyCar))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void add_ShouldReturnException() throws Exception {
+        JSONObject companyCar = new JSONObject();
+        JSONObject manufacturer = new JSONObject();
+        manufacturer.put("id", 1);
+        manufacturer.put("name", "Opel");
+        JSONObject color = new JSONObject();
+        color.put("id", 1);
+        color.put("name", "Grey");
+        JSONObject driver = new JSONObject();
+        driver.put("id", 1);
+        companyCar.put("id", 1);
+        companyCar.put("licencePlateNumber", "IIL-215");
+        companyCar.put("manufacturer", manufacturer);
+        companyCar.put("model", "");
+        companyCar.put("color", color);
+        companyCar.put("driver", driver);
+        companyCar.put("inUseDate", LocalDate.of(2003,12,12));
+        companyCar.put("repairRequired", false);
+
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/companycar")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(String.valueOf(companyCar))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void update_ShouldReturnOK() throws Exception {
+        JSONObject companyCar = new JSONObject();
+        JSONObject manufacturer = new JSONObject();
+        manufacturer.put("id", 1);
+        manufacturer.put("name", "Opel");
+        JSONObject color = new JSONObject();
+        color.put("id", 1);
+        color.put("name", "Grey");
+        JSONObject driver = new JSONObject();
+        driver.put("id", 1);
+        companyCar.put("id", 1);
+        companyCar.put("licencePlateNumber", "IIL-215");
+        companyCar.put("manufacturer", manufacturer);
+        companyCar.put("model", "Corsa");
+        companyCar.put("color", color);
+        companyCar.put("driver", driver);
+        companyCar.put("inUseDate", LocalDate.of(2003,12,12));
+        companyCar.put("repairRequired", false);
+
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/companycar/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(String.valueOf(companyCar))
                 .accept(MediaType.APPLICATION_JSON))

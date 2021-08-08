@@ -57,6 +57,11 @@ public class ManufacturerControllerTest {
     }
 
     @Test
+    public void findById_ShouldReturnException() throws Exception {
+        mockMvc.perform(get("/manufacturer/a")).andExpect(status().isBadRequest());
+    }
+
+    @Test
     public void add_ShouldReturnOK() throws Exception {
         JSONObject json = new JSONObject();
         json.put("id", 1);
@@ -64,6 +69,34 @@ public class ManufacturerControllerTest {
 
 
         mockMvc.perform(MockMvcRequestBuilders.post("/manufacturer")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(String.valueOf(json))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    public void add_ShouldReturnException() throws Exception {
+        JSONObject json = new JSONObject();
+        json.put("id", 1);
+        json.put("name", "a");
+
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/manufacturer")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(String.valueOf(json))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void update_ShouldReturnOK() throws Exception {
+        JSONObject json = new JSONObject();
+        json.put("id", 1);
+        json.put("name", "Opel");
+
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/manufacturer/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(String.valueOf(json))
                 .accept(MediaType.APPLICATION_JSON))

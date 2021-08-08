@@ -2,6 +2,7 @@ package com.codecool.company_car.service;
 
 import com.codecool.company_car.dto.CityDto;
 import com.codecool.company_car.model.City;
+import javassist.NotFoundException;
 
 import java.util.List;
 

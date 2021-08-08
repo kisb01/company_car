@@ -1,6 +1,8 @@
 package com.codecool.company_car.controller;
 
+import com.codecool.company_car.converter.StringToLong;
 import com.codecool.company_car.dto.DriverDto;
+import com.codecool.company_car.exception.DriverNotFoundException;
 import com.codecool.company_car.model.Driver;
 import com.codecool.company_car.service.DriverService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,8 +28,11 @@ public class DriverController {
     }
 
     @GetMapping("/{id}")
-    public Driver findById(@PathVariable("id") Long id) {
-        return driverService.findById(id);
+    public Driver findById(@PathVariable("id") String id) {
+        if (StringToLong.convert(id) == null) {
+            throw new DriverNotFoundException("Must enter a valid number");
+        }
+        return driverService.findById(StringToLong.convert(id));
     }
 
     @PostMapping
@@ -36,14 +41,20 @@ public class DriverController {
     }
 
     @PutMapping("/{id}")
-    public void update(@Valid @RequestBody DriverDto driverDto, @PathVariable("id") Long id) {
-        driverDto.setDriverId(id);
+    public void update(@Valid @RequestBody DriverDto driverDto, @PathVariable("id") String id) {
+        if (StringToLong.convert(id) == null) {
+            throw new DriverNotFoundException("Must enter a valid number");
+        }
+        driverDto.setDriverId(StringToLong.convert(id));
         driverService.saveDriverDto(driverDto);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Long id) {
-        driverService.deleteById(id);
+    public void delete(@PathVariable("id") String id) {
+        if (StringToLong.convert(id) == null) {
+            throw new DriverNotFoundException("Must enter a valid number");
+        }
+        driverService.deleteById(StringToLong.convert(id));
     }
 
     @GetMapping("/name")

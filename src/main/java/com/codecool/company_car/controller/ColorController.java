@@ -1,6 +1,8 @@
 package com.codecool.company_car.controller;
 
+import com.codecool.company_car.converter.StringToLong;
 import com.codecool.company_car.dto.ColorDto;
+import com.codecool.company_car.exception.ColorNotFoundException;
 import com.codecool.company_car.model.Color;
 import com.codecool.company_car.service.ColorService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,8 +28,11 @@ public class ColorController {
     }
 
     @GetMapping("/{id}")
-    public Color findById(@PathVariable("id") Long id) {
-        return colorService.findById(id);
+    public Color findById(@PathVariable("id") String id) {
+        if (StringToLong.convert(id) == null) {
+            throw new ColorNotFoundException("Must enter a valid number");
+        }
+        return colorService.findById(StringToLong.convert(id));
     }
 
     @PostMapping
@@ -36,13 +41,19 @@ public class ColorController {
     }
 
     @PutMapping("/{id}")
-    public void update(@Valid @RequestBody ColorDto colorDto, @PathVariable("id") Long id) {
-        colorDto.setId(id);
+    public void update(@Valid @RequestBody ColorDto colorDto, @PathVariable("id") String id) {
+        if (StringToLong.convert(id) == null) {
+            throw new ColorNotFoundException("Must enter a valid number");
+        }
+        colorDto.setId(StringToLong.convert(id));
         colorService.saveColorDto(colorDto);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Long id) {
-        colorService.deleteById(id);
+    public void delete(@PathVariable("id") String id) {
+        if (StringToLong.convert(id) == null) {
+            throw new ColorNotFoundException("Must enter a valid number");
+        }
+        colorService.deleteById(StringToLong.convert(id));
     }
 }

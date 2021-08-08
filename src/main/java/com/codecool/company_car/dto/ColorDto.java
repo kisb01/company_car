@@ -11,6 +11,6 @@ import lombok.Setter;
 public class ColorDto {
 
     private Long id;
-    @Name(message = "Color name should be at least 2 letters with a capital first letter")
+    @Name(message = "{color.name}")
     private String name;
 }

@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -65,12 +66,11 @@ public class MyControllerAdvice {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
-        logger.error("Posted entity contains error(s): " + exception.getErrorCount());
         StringBuilder sb = new StringBuilder("Posted entity contains error(s): " + exception.getErrorCount()).append(System.lineSeparator());
         exception.getAllErrors().forEach(err -> {
-            String msg = err.getCode() + " " + err.getDefaultMessage();
-            sb.append(msg).append(System.lineSeparator());
-            logger.error(msg);
+            String fieldName = ((FieldError) err).getField();
+            String msg = err.getDefaultMessage();
+            sb.append(fieldName).append(" ").append(msg).append(System.lineSeparator());
         });
         return new ResponseEntity<>(sb.toString(), HttpStatus.BAD_REQUEST);
     }
@@ -80,4 +80,5 @@ public class MyControllerAdvice {
         logger.error(exception.getMessage());
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
 }

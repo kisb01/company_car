@@ -1,6 +1,8 @@
 package com.codecool.company_car.controller;
 
+import com.codecool.company_car.converter.StringToLong;
 import com.codecool.company_car.dto.ManufacturerDto;
+import com.codecool.company_car.exception.ManufacturerNotFoundException;
 import com.codecool.company_car.model.Manufacturer;
 import com.codecool.company_car.service.ManufacturerService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,8 +28,11 @@ public class ManufacturerController {
     }
 
     @GetMapping("/{id}")
-    public Manufacturer getById(@PathVariable("id") Long id) {
-        return manufacturerService.findById(id);
+    public Manufacturer findById(@PathVariable("id") String id) {
+        if (StringToLong.convert(id) == null) {
+            throw new ManufacturerNotFoundException("Must enter a valid number");
+        }
+        return manufacturerService.findById(StringToLong.convert(id));
     }
 
     @PostMapping
@@ -37,13 +42,19 @@ public class ManufacturerController {
 
     @PutMapping("/{id}")
     public void update(@Valid @RequestBody ManufacturerDto manufacturerDto,
-                       @PathVariable("id") Long id) {
-        manufacturerDto.setId(id);
+                       @PathVariable("id") String id) {
+        if (StringToLong.convert(id) == null) {
+            throw new ManufacturerNotFoundException("Must enter a valid number");
+        }
+        manufacturerDto.setId(StringToLong.convert(id));
         manufacturerService.saveManufacturerDto(manufacturerDto);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Long id) {
-        manufacturerService.deleteById(id);
+    public void delete(@PathVariable("id") String id) {
+        if (StringToLong.convert(id) == null) {
+            throw new ManufacturerNotFoundException("Must enter a valid number");
+        }
+        manufacturerService.deleteById(StringToLong.convert(id));
     }
 }

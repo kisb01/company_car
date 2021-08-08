@@ -57,6 +57,11 @@ class CityControllerTest {
     }
 
     @Test
+    public void findById_ShouldReturnException() throws Exception {
+        mockMvc.perform(get("/city/a")).andExpect(status().isBadRequest());
+    }
+
+    @Test
     public void add_ShouldReturnOK() throws Exception {
         JSONObject json = new JSONObject();
         json.put("id", 1);
@@ -81,6 +86,19 @@ class CityControllerTest {
                 .content(String.valueOf(json))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+    }
+
+    @Test
+    public void add_ShouldReturnException() throws Exception {
+        JSONObject json = new JSONObject();
+        json.put("id", 1);
+        json.put("name", "a");
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/city")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(String.valueOf(json))
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 
     @Test

@@ -11,7 +11,7 @@ import lombok.Setter;
 public class CityDto {
 
     private Long id;
-    @Name(message = "City name should be at least 2 letters with a capital first letter")
+    @Name(message = "{city.name}")
     private String name;
 
 }
