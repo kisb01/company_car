@@ -105,10 +105,6 @@ public class ManufacturerControllerTest {
 
     @Test
     public void delete_ShouldReturnOk() throws Exception {
-        JSONObject json = new JSONObject();
-        json.put("id", 1);
-        json.put("name", "Opel");
-
         mockMvc.perform(MockMvcRequestBuilders.delete("/manufacturer/1"))
                 .andExpect(status().isOk());
     }

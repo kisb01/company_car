@@ -19,7 +19,6 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -51,7 +50,7 @@ public class CompanyCarControllerTest {
         companyCar.setModel("Corsa");
         companyCar.setColor(color);
         companyCar.setDriver(driver);
-        companyCar.setInUseSince(LocalDate.of(2003,12,12));
+        companyCar.setInUseSince(LocalDate.of(2003, 12, 12));
         companyCar.setRepairRequired(false);
 
         when(companyCarService.findAll()).thenReturn(List.of(companyCar));
@@ -85,7 +84,7 @@ public class CompanyCarControllerTest {
         companyCar.setModel("Corsa");
         companyCar.setColor(color);
         companyCar.setDriver(driver);
-        companyCar.setInUseSince(LocalDate.of(2003,12,12));
+        companyCar.setInUseSince(LocalDate.of(2003, 12, 12));
         companyCar.setRepairRequired(false);
 
         when(companyCarService.findById(1L)).thenReturn(companyCar);
@@ -123,7 +122,7 @@ public class CompanyCarControllerTest {
         companyCar.put("model", "Corsa");
         companyCar.put("color", color);
         companyCar.put("driver", driver);
-        companyCar.put("inUseDate", LocalDate.of(2003,12,12));
+        companyCar.put("inUseDate", LocalDate.of(2003, 12, 12));
         companyCar.put("repairRequired", false);
 
 
@@ -151,7 +150,7 @@ public class CompanyCarControllerTest {
         companyCar.put("model", "");
         companyCar.put("color", color);
         companyCar.put("driver", driver);
-        companyCar.put("inUseDate", LocalDate.of(2003,12,12));
+        companyCar.put("inUseDate", LocalDate.of(2003, 12, 12));
         companyCar.put("repairRequired", false);
 
 
@@ -179,7 +178,7 @@ public class CompanyCarControllerTest {
         companyCar.put("model", "Corsa");
         companyCar.put("color", color);
         companyCar.put("driver", driver);
-        companyCar.put("inUseDate", LocalDate.of(2003,12,12));
+        companyCar.put("inUseDate", LocalDate.of(2003, 12, 12));
         companyCar.put("repairRequired", false);
 
 
@@ -192,24 +191,6 @@ public class CompanyCarControllerTest {
 
     @Test
     public void delete_ShouldReturnOk() throws Exception {
-        JSONObject companyCar = new JSONObject();
-        JSONObject manufacturer = new JSONObject();
-        manufacturer.put("id", 1);
-        manufacturer.put("name", "Opel");
-        JSONObject color = new JSONObject();
-        color.put("id", 1);
-        color.put("name", "Grey");
-        JSONObject driver = new JSONObject();
-        driver.put("id", 1);
-        companyCar.put("id", 1);
-        companyCar.put("licencePlateNumber", "IIL-215");
-        companyCar.put("manufacturer", manufacturer);
-        companyCar.put("model", "Corsa");
-        companyCar.put("color", color);
-        companyCar.put("driver", driver);
-        companyCar.put("inUseDate", LocalDate.of(2003,12,12));
-        companyCar.put("repairRequired", false);
-
         mockMvc.perform(MockMvcRequestBuilders.delete("/companycar/1"))
                 .andExpect(status().isOk());
     }

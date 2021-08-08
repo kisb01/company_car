@@ -103,10 +103,6 @@ public class ColorControllerTest {
 
     @Test
     public void delete_ShouldReturnOk() throws Exception {
-        JSONObject json = new JSONObject();
-        json.put("id", 1);
-        json.put("name", "Red");
-
         mockMvc.perform(MockMvcRequestBuilders.delete("/color/1"))
                 .andExpect(status().isOk());
     }

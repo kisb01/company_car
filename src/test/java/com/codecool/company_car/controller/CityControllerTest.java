@@ -1,6 +1,7 @@
 package com.codecool.company_car.controller;
 
 import com.codecool.company_car.model.City;
+import com.codecool.company_car.model.Driver;
 import com.codecool.company_car.service.CityService;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -11,6 +12,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -103,10 +106,6 @@ class CityControllerTest {
 
     @Test
     public void delete_ShouldReturnOk() throws Exception {
-        JSONObject json = new JSONObject();
-        json.put("id", 1);
-        json.put("name", "Budapest");
-
         mockMvc.perform(MockMvcRequestBuilders.delete("/city/1"))
                 .andExpect(status().isOk());
     }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.persistence.EntityNotFoundException;
+import java.sql.SQLException;
 
 @ControllerAdvice
 public class MyControllerAdvice {
@@ -46,24 +47,6 @@ public class MyControllerAdvice {
         return new ResponseEntity<>(manufacturerNotFoundException.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(CityHasDriverException.class)
-    public ResponseEntity<String> handleCityHasDriverException(CityHasDriverException cityHasDriverException) {
-        logger.error(cityHasDriverException.getMessage());
-        return new ResponseEntity<>(cityHasDriverException.getMessage(), HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(ColorHasCarException.class)
-    public ResponseEntity<String> handleColorHasCarException(ColorHasCarException colorHasCarException) {
-        logger.error(colorHasCarException.getMessage());
-        return new ResponseEntity<>(colorHasCarException.getMessage(), HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(ManufacturerHasCarException.class)
-    public ResponseEntity<String> handleManufacturerHasCarException(ManufacturerHasCarException manufacturerHasCarException) {
-        logger.error(manufacturerHasCarException.getMessage());
-        return new ResponseEntity<>(manufacturerHasCarException.getMessage(), HttpStatus.BAD_REQUEST);
-    }
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<String> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception) {
         StringBuilder sb = new StringBuilder("Posted entity contains error(s): " + exception.getErrorCount()).append(System.lineSeparator());
@@ -77,6 +60,12 @@ public class MyControllerAdvice {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<String> handleEntityNotFoundException(EntityNotFoundException exception) {
+        logger.error(exception.getMessage());
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(SQLException.class)
+    public ResponseEntity<String> handleSQLException(SQLException exception) {
         logger.error(exception.getMessage());
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }

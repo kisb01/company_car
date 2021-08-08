@@ -3,7 +3,6 @@ package com.codecool.company_car.service.implementation;
 import com.codecool.company_car.converter.ManufacturerDtoToManufacturer;
 import com.codecool.company_car.converter.ManufacturerToManufacturerDto;
 import com.codecool.company_car.dto.ManufacturerDto;
-import com.codecool.company_car.exception.ManufacturerHasCarException;
 import com.codecool.company_car.exception.ManufacturerNotFoundException;
 import com.codecool.company_car.model.Manufacturer;
 import com.codecool.company_car.repository.ManufacturerRepository;
@@ -54,9 +53,6 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 
     @Override
     public void deleteById(Long id) {
-        if (manufacturerRepository.findById(id).get().getCompanyCars().size() > 0) {
-            throw new ManufacturerHasCarException("There is at least one company car from this manufacturer");
-        }
         manufacturerRepository.deleteById(id);
     }
 }
