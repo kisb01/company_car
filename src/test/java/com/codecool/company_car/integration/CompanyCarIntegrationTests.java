@@ -1,7 +1,6 @@
-package com.codecool.company_car;
+package com.codecool.company_car.integration;
 
 import com.codecool.company_car.model.*;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -10,11 +9,14 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -40,7 +42,7 @@ public class CompanyCarIntegrationTests {
         }};
         ResponseEntity<Driver[]> responseEntity = restTemplate.getForEntity(BASE_URL + "/driver/name?city=Miskolc", Driver[].class);
         List<Driver> actual = Arrays.asList(responseEntity.getBody());
-        Assertions.assertEquals(expected.get(0).getFirstName(), actual.get(0).getFirstName());
+        assertEquals(expected.get(0).getFirstName(), actual.get(0).getFirstName());
     }
 
     @Test
@@ -52,7 +54,7 @@ public class CompanyCarIntegrationTests {
 
         ResponseEntity<CompanyCar[]> responseEntity = restTemplate.getForEntity(BASE_URL + "/companycar/driver?name=Eszter", CompanyCar[].class);
         List<CompanyCar> actual = Arrays.asList(responseEntity.getBody());
-        Assertions.assertEquals(expected.get(0).getLicencePlateNumber(), actual.get(0).getLicencePlateNumber());
+        assertEquals(expected.get(0).getLicencePlateNumber(), actual.get(0).getLicencePlateNumber());
     }
 
     @Test
@@ -63,7 +65,7 @@ public class CompanyCarIntegrationTests {
         }};
         ResponseEntity<CompanyCar[]> responseEntity = restTemplate.getForEntity(BASE_URL + "/companycar/manufacturer?name=Opel", CompanyCar[].class);
         List<CompanyCar> actual = Arrays.asList(responseEntity.getBody());
-        Assertions.assertEquals(expected.get(0).getLicencePlateNumber(), actual.get(0).getLicencePlateNumber());
+        assertEquals(expected.get(0).getLicencePlateNumber(), actual.get(0).getLicencePlateNumber());
     }
 
     @Test
@@ -74,7 +76,7 @@ public class CompanyCarIntegrationTests {
         }};
         ResponseEntity<CompanyCar[]> responseEntity = restTemplate.getForEntity(BASE_URL + "/companycar/color?name=Grey", CompanyCar[].class);
         List<CompanyCar> actual = Arrays.asList(responseEntity.getBody());
-        Assertions.assertEquals(expected.get(0).getLicencePlateNumber(), actual.get(0).getLicencePlateNumber());
+        assertEquals(expected.get(0).getLicencePlateNumber(), actual.get(0).getLicencePlateNumber());
     }
 
     @Test
@@ -85,7 +87,7 @@ public class CompanyCarIntegrationTests {
         }};
         ResponseEntity<CompanyCar[]> responseEntity = restTemplate.getForEntity(BASE_URL + "/companycar/repair", CompanyCar[].class);
         List<CompanyCar> actual = Arrays.asList(responseEntity.getBody());
-        Assertions.assertEquals(expected.get(0).getLicencePlateNumber(), actual.get(0).getLicencePlateNumber());
+        assertEquals(expected.get(0).getLicencePlateNumber(), actual.get(0).getLicencePlateNumber());
     }
 
     @Test
@@ -96,6 +98,7 @@ public class CompanyCarIntegrationTests {
         }};
         ResponseEntity<CompanyCar[]> responseEntity = restTemplate.getForEntity(BASE_URL + "/companycar/city?name=Miskolc", CompanyCar[].class);
         List<CompanyCar> actual = Arrays.asList(responseEntity.getBody());
-        Assertions.assertEquals(expected.get(0).getLicencePlateNumber(), actual.get(0).getLicencePlateNumber());
+        assertEquals(expected.get(0).getLicencePlateNumber(), actual.get(0).getLicencePlateNumber());
     }
+
 }
