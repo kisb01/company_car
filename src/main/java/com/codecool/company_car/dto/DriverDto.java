@@ -2,6 +2,12 @@ package com.codecool.company_car.dto;
 
 import com.codecool.company_car.annotation.Name;
 import com.codecool.company_car.annotation.PastMoreThan18Years;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,6 +19,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class DriverDto {
 
     private Long driverId;
@@ -23,6 +30,7 @@ public class DriverDto {
     @Min(value = 1, message = "City id must be greater than zero")
     @NotFound
     private Long cityId;
+
     @PastMoreThan18Years(message = "{driver.birthDate}")
     private LocalDate birthDate;
 }

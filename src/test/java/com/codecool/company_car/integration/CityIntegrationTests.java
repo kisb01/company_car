@@ -21,12 +21,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ActiveProfiles("test")
 public class CityIntegrationTests {
 
+    private static final TestRestTemplate restTemplate = new TestRestTemplate();
     @LocalServerPort
     private Integer port;
-
     private String baseUrl;
-
-    private static final TestRestTemplate restTemplate = new TestRestTemplate();
 
     @BeforeEach
     public void init() {
