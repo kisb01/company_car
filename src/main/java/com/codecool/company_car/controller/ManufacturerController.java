@@ -36,18 +36,19 @@ public class ManufacturerController {
     }
 
     @PostMapping
-    public void add(@Valid @RequestBody ManufacturerDto manufacturerDto) {
-        manufacturerService.saveManufacturerDto(manufacturerDto);
+    public ManufacturerDto add(@Valid @RequestBody ManufacturerDto manufacturerDto) {
+        manufacturerDto.setId(null);
+        return manufacturerService.saveManufacturerDto(manufacturerDto);
     }
 
     @PutMapping("/{id}")
-    public void update(@Valid @RequestBody ManufacturerDto manufacturerDto,
-                       @PathVariable("id") String id) {
+    public ManufacturerDto update(@Valid @RequestBody ManufacturerDto manufacturerDto,
+                                  @PathVariable("id") String id) {
         if (StringToLong.convert(id) == null) {
             throw new ManufacturerNotFoundException("Must enter a valid number");
         }
         manufacturerDto.setId(StringToLong.convert(id));
-        manufacturerService.saveManufacturerDto(manufacturerDto);
+        return manufacturerService.saveManufacturerDto(manufacturerDto);
     }
 
     @DeleteMapping("/{id}")

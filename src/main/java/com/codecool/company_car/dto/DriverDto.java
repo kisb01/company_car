@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.NotFound;
 
+import javax.validation.constraints.Min;
 import java.time.LocalDate;
 
 @Getter
@@ -19,6 +20,7 @@ public class DriverDto {
     private String firstName;
     @Name(message = "{driver.lastName}")
     private String lastName;
+    @Min(value = 1, message = "City id must be greater than zero")
     @NotFound
     private Long cityId;
     @PastMoreThan18Years(message = "{driver.birthDate}")

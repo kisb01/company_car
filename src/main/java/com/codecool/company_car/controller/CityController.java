@@ -5,8 +5,6 @@ import com.codecool.company_car.dto.CityDto;
 import com.codecool.company_car.exception.CityNotFoundException;
 import com.codecool.company_car.model.City;
 import com.codecool.company_car.service.CityService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,7 +15,6 @@ import java.util.List;
 public class CityController {
 
     private final CityService cityService;
-    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public CityController(CityService cityService) {
         this.cityService = cityService;
@@ -37,17 +34,18 @@ public class CityController {
     }
 
     @PostMapping
-    public void add(@Valid @RequestBody CityDto cityDto) {
-        cityService.saveCityDto(cityDto);
+    public CityDto add(@Valid @RequestBody CityDto cityDto) {
+        cityDto.setId(null);
+        return cityService.saveCityDto(cityDto);
     }
 
     @PutMapping("/{id}")
-    public void update(@Valid @RequestBody CityDto cityDto, @PathVariable("id") String id) {
+    public CityDto update(@Valid @RequestBody CityDto cityDto, @PathVariable("id") String id) {
         if (StringToLong.convert(id) == null) {
             throw new CityNotFoundException("Must enter a valid number");
         }
         cityDto.setId(StringToLong.convert(id));
-        cityService.saveCityDto(cityDto);
+        return cityService.saveCityDto(cityDto);
     }
 
     @DeleteMapping("/{id}")

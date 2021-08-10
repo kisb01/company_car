@@ -36,17 +36,18 @@ public class DriverController {
     }
 
     @PostMapping
-    public void add(@Valid @RequestBody DriverDto driverDto) {
-        driverService.saveDriverDto(driverDto);
+    public DriverDto add(@Valid @RequestBody DriverDto driverDto) {
+        driverDto.setDriverId(null);
+        return driverService.saveDriverDto(driverDto);
     }
 
     @PutMapping("/{id}")
-    public void update(@Valid @RequestBody DriverDto driverDto, @PathVariable("id") String id) {
+    public DriverDto update(@Valid @RequestBody DriverDto driverDto, @PathVariable("id") String id) {
         if (StringToLong.convert(id) == null) {
             throw new DriverNotFoundException("Must enter a valid number");
         }
         driverDto.setDriverId(StringToLong.convert(id));
-        driverService.saveDriverDto(driverDto);
+        return driverService.saveDriverDto(driverDto);
     }
 
     @DeleteMapping("/{id}")

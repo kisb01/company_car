@@ -36,17 +36,18 @@ public class CompanyCarController {
     }
 
     @PostMapping
-    public void add(@Valid @RequestBody CompanyCarDto companyCarDto) {
-        companyCarService.saveCompanyCarDto(companyCarDto);
+    public CompanyCarDto add(@Valid @RequestBody CompanyCarDto companyCarDto) {
+        companyCarDto.setId(null);
+        return companyCarService.saveCompanyCarDto(companyCarDto);
     }
 
     @PutMapping("/{id}")
-    public void update(@Valid @RequestBody CompanyCarDto companyCarDto, @PathVariable("id") String id) {
+    public CompanyCarDto update(@Valid @RequestBody CompanyCarDto companyCarDto, @PathVariable("id") String id) {
         if (StringToLong.convert(id) == null) {
             throw new CompanyCarNotFoundException("Must enter a valid number");
         }
         companyCarDto.setId(StringToLong.convert(id));
-        companyCarService.saveCompanyCarDto(companyCarDto);
+        return companyCarService.saveCompanyCarDto(companyCarDto);
     }
 
     @DeleteMapping("/{id}")

@@ -70,4 +70,10 @@ public class MyControllerAdvice {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception exception) {
+        logger.error(exception.getMessage());
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
 }

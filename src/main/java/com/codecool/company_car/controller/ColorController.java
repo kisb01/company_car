@@ -36,17 +36,18 @@ public class ColorController {
     }
 
     @PostMapping
-    public void add(@Valid @RequestBody ColorDto colorDto) {
-        colorService.saveColorDto(colorDto);
+    public ColorDto add(@Valid @RequestBody ColorDto colorDto) {
+        colorDto.setId(null);
+        return colorService.saveColorDto(colorDto);
     }
 
     @PutMapping("/{id}")
-    public void update(@Valid @RequestBody ColorDto colorDto, @PathVariable("id") String id) {
+    public ColorDto update(@Valid @RequestBody ColorDto colorDto, @PathVariable("id") String id) {
         if (StringToLong.convert(id) == null) {
             throw new ColorNotFoundException("Must enter a valid number");
         }
         colorDto.setId(StringToLong.convert(id));
-        colorService.saveColorDto(colorDto);
+        return colorService.saveColorDto(colorDto);
     }
 
     @DeleteMapping("/{id}")
