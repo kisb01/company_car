@@ -4,7 +4,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.time.LocalDate;
 
-public class PastMoreThan18YearsValidator implements ConstraintValidator<PastMoreThan18Years, LocalDate> {
+public class PastMoreThan18YearsValidator implements ConstraintValidator<PastMoreThan18Years, String> {
 
     @Override
     public void initialize(PastMoreThan18Years constraintAnnotation) {
@@ -12,8 +12,8 @@ public class PastMoreThan18YearsValidator implements ConstraintValidator<PastMor
     }
 
     @Override
-    public boolean isValid(LocalDate localDate, ConstraintValidatorContext constraintValidatorContext) {
-        return localDate != null &&
-                localDate.isBefore(LocalDate.now().minusYears(18));
+    public boolean isValid(String input, ConstraintValidatorContext constraintValidatorContext) {
+        return input != null &&
+                LocalDate.parse(input).isBefore(LocalDate.now().minusYears(18));
     }
 }
