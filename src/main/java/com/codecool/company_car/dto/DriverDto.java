@@ -32,5 +32,5 @@ public class DriverDto {
     private Long cityId;
 
     @PastMoreThan18Years(message = "{driver.birthDate}")
-    private LocalDate birthDate;
+    private String birthDate;
 }
