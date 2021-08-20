@@ -1,5 +1,6 @@
 package com.codecool.company_car.integration;
 
+import com.codecool.company_car.dto.CompanyCarDto;
 import com.codecool.company_car.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,7 +10,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -33,6 +33,54 @@ public class CompanyCarIntegrationTests {
     @BeforeEach
     public void init() {
         BASE_URL = "http://localhost:" + port;
+    }
+
+    @Test
+    public void addNewCompanyCar_shouldReturnCompanyCarName() {
+        CompanyCarDto testCompanyCar = new CompanyCarDto(null, "RAP-949", 2L, "SuperB", 3L, 4L, LocalDate.of(2020, 12, 12), false);
+        CompanyCarDto result = restTemplate.postForObject(BASE_URL + "/companycar", testCompanyCar, CompanyCarDto.class);
+        assertEquals(result.getLicencePlateNumber(), testCompanyCar.getLicencePlateNumber());
+    }
+
+    @Test
+    public void getCompanyCar_returnsFullList() {
+        List<CompanyCar> companyCars = List.of(restTemplate.getForObject(BASE_URL + "/companycar", CompanyCar[].class));
+        assertEquals(5, companyCars.size());
+    }
+
+    @Test
+    public void getCompanyCarById_withOnePostedElement_returnsCompanyCarWithSameId() {
+        CompanyCarDto testCompanyCar = new CompanyCarDto(null, "RAP-949", 2L, "SuperB", 3L, null, LocalDate.of(2020, 12, 12), false);
+        testCompanyCar = restTemplate.postForObject(BASE_URL + "/companycar", testCompanyCar, CompanyCarDto.class);
+        CompanyCar result = restTemplate.getForObject(BASE_URL + "/companycar/" + testCompanyCar.getId(), CompanyCar.class);
+        assertEquals(result.getLicencePlateNumber(), testCompanyCar.getLicencePlateNumber());
+    }
+
+    @Test
+    public void updateCompanyCar_withOnePostedElement_returnUpdatedCompanyCar() {
+        CompanyCarDto testCompanyCar = new CompanyCarDto(null, "RAP-949", 2L, "SuperB", 3L, null, LocalDate.of(2020, 12, 12), false);
+        testCompanyCar = restTemplate.postForObject(BASE_URL + "/companycar", testCompanyCar, CompanyCarDto.class);
+
+        testCompanyCar.setLicencePlateNumber("AOL-123");
+        restTemplate.put(BASE_URL + "/companycar/" + testCompanyCar.getId(), testCompanyCar);
+        CompanyCar updatedCompanyCar = restTemplate.getForObject(BASE_URL + "/companycar/" + testCompanyCar.getId(), CompanyCar.class);
+
+        assertEquals("AOL-123", updatedCompanyCar.getLicencePlateNumber());
+    }
+
+    @Test
+    public void deleteCompanyCarById_withCompanyCarsInDatabase_getAllShouldReturnRemaingCompanyCars() {
+        List<CompanyCar> companyCars = new ArrayList<>(List.of(restTemplate.getForObject(BASE_URL + "/companycar", CompanyCar[].class)));
+
+        restTemplate.delete(BASE_URL + "/companycar/" + companyCars.get(0).getId());
+        companyCars.remove(0);
+
+        List<CompanyCar> remainingCompanyCars = List.of(restTemplate.getForObject(BASE_URL + "/companycar", CompanyCar[].class));
+
+        for (int i = 0; i < companyCars.size(); i++) {
+            assertEquals(companyCars.get(i).getLicencePlateNumber(), remainingCompanyCars.get(i).getLicencePlateNumber());
+        }
+        assertEquals(companyCars.size(), remainingCompanyCars.size());
     }
 
     @Test
