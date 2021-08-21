@@ -86,7 +86,7 @@ public class ManufacturerIntegrationTests {
         List<Manufacturer> remainingManufacturers = List.of(restTemplate.getForObject(baseUrl, Manufacturer[].class));
 
         assertEquals(testManufacturers.size(), remainingManufacturers.size());
-        for(int i = 0; i< testManufacturers.size(); i++){
+        for (int i = 0; i < testManufacturers.size(); i++) {
             assertEquals(testManufacturers.get(i).getName(), remainingManufacturers.get(i).getName());
         }
     }

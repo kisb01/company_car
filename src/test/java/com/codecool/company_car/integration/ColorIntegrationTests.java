@@ -2,7 +2,6 @@ package com.codecool.company_car.integration;
 
 import com.codecool.company_car.dto.ColorDto;
 import com.codecool.company_car.model.Color;
-import com.codecool.company_car.model.Color;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

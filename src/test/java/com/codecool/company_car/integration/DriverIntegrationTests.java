@@ -2,6 +2,7 @@ package com.codecool.company_car.integration;
 
 import com.codecool.company_car.dto.CityDto;
 import com.codecool.company_car.dto.DriverDto;
+import com.codecool.company_car.exception.DriverNotFoundException;
 import com.codecool.company_car.model.City;
 import com.codecool.company_car.model.Driver;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,10 +14,11 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
