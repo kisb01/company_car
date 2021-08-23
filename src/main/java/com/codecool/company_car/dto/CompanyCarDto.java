@@ -20,11 +20,11 @@ public class CompanyCarDto {
     private Long id;
     @Pattern(regexp = "([A-Z]{3}[-]*[0-9]{3})", message = "{companyCar.licencePlateNumber}")
     private String licencePlateNumber;
-    @Min(value = 1, message = "Manufacturer id must be greater than zero")
+    @Min(value = 1, message = "{companyCar.manufacturerId}")
     private Long manufacturerId;
     @NotBlank(message = "{companyCar.model}")
     private String model;
-    @Min(value = 1, message = "Color id must be greater than zero")
+    @Min(value = 1, message = "{companyCar.colorId}")
     private Long colorId;
     private Long driverId;
     @PastOrPresent(message = "{companyCar.inUseSince}")

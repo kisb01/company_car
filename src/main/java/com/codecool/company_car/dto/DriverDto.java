@@ -27,8 +27,7 @@ public class DriverDto {
     private String firstName;
     @Name(message = "{driver.lastName}")
     private String lastName;
-    @Min(value = 1, message = "City id must be greater than zero")
-    @NotFound
+    @Min(value = 1, message = "{driver.cityId}")
     private Long cityId;
 
     @PastMoreThan18Years(message = "{driver.birthDate}")
