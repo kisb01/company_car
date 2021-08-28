@@ -104,12 +104,6 @@ public class CompanyCarController {
         companyCarService.deleteById(id);
     }
 
-//    @PostMapping("/add")
-//    @ResponseBody
-//    public void addCompanyCar(@RequestBody CompanyCarDto companyCarDto) {
-//        companyCarService.saveCompanyCarDto(companyCarDto);
-//    }
-
     @GetMapping("/driver")
     public List<CompanyCar> findByDriver(@RequestParam String name) {
         return companyCarService.findByDriver(name);
@@ -119,11 +113,6 @@ public class CompanyCarController {
     public List<CompanyCar> findAllByManufacturer(@RequestParam String name) {
         return companyCarService.findAllByManufacturer(name);
     }
-
-//    @GetMapping("/color")
-//    public List<CompanyCar> findAllByColor(@RequestParam String name) {
-//        return companyCarService.findAllByColor(name);
-//    }
 
     @GetMapping("/repair")
     public List<CompanyCar> findAllNeedsRepair() {

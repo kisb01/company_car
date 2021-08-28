@@ -50,6 +50,11 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    public CityDto findDtoById(Long id) {
+        return cityToCityDto.convert(findById(id));
+    }
+
+    @Override
     public CityDto saveCityDto(CityDto cityDto) {
         City city = cityDtoToCity.convert(cityDto);
         City savedCity = cityRepository.save(city);

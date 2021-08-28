@@ -46,6 +46,11 @@ public class DriverServiceImpl implements DriverService {
     }
 
     @Override
+    public DriverDto findDtoById(Long id) {
+        return driverToDriverDto.convert(findById(id));
+    }
+
+    @Override
     public DriverDto saveDriverDto(DriverDto driverDto) {
         Driver driver = driverDtoToDriver.convert(driverDto);
         Driver savedDriver = driverRepository.save(driver);
@@ -60,5 +65,10 @@ public class DriverServiceImpl implements DriverService {
     @Override
     public List<Driver> allDriversFromACity(String name) {
         return findAll().stream().filter(driver -> driver.getCity().getName().equals(name)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Driver> findAllAvailable() {
+        return findAll().stream().filter(driver -> driver.getDriverId() == null).collect(Collectors.toList());
     }
 }

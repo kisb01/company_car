@@ -20,7 +20,7 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Name(message = "City name can not be null")
+    @Name(message = "City name is invalid")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "city")
     private List<Driver> drivers = new ArrayList<>();
